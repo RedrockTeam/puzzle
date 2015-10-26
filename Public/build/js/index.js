@@ -122,8 +122,7 @@
 			};
 
 			return {
-				play: play,
-				stop: stop
+				play: play
 			};
 		})();
 
@@ -369,5 +368,3 @@
 
 		})();
 
-
-		$('.time-counter-container').on('click', game.stop);

@@ -6,8 +6,6 @@
 		<meta name="screen-orientation" content="portrait">
 		<title>游戏首页</title>
 		<link rel="stylesheet" href="__PUBLIC__/src/css/index.min.css">
-		<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css"> -->
-		<!-- <link rel="stylesheet" href="__PUBLIC__/src/css/animate.min.css"> -->
 	</head>
 	<body>
 		
@@ -82,20 +80,18 @@
 	
 
 	</body>
-	<script src="__PUBLIC__/src/js/zepto.min.js"></script>
-	<!-- <script src="__PUBLIC__/build/js/index.js"></script> -->
+	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
 	<script src="__PUBLIC__/src/js/index.min.js"></script>
 	<script>
 
 		$(function () {
-			document.querySelector('.start-btn').addEventListener('click', function () {
+			document.querySelector('.start-btn').addEventListener('touchend', function () {
 				game.play();
 			}, false);
 
-			document.querySelector('.replay-btn').addEventListener('click', function () {
+			document.querySelector('.replay-btn').addEventListener('touchend', function () {
 				game.play(true);
 			}, false);
-
 		});
 
 	</script>
