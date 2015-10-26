@@ -54,7 +54,7 @@
 
 	// 合并，压缩CSS
 	gulp.task('styles', function() {
-	    gulp.src('./src/css/*.css')
+	    gulp.src('./src/css/index.css')
 	        .pipe(concat('index.min.css'))
 	        .pipe(cssmin())
 	        .pipe(gulp.dest('./src/css'));
