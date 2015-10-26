@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<meta name="screen-orientation" content="portrait">
+		<title>游戏首页</title>
+		<link rel="stylesheet" href="__PUBLIC__/src/css/index.min.css">
+		<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css"> -->
+		<!-- <link rel="stylesheet" href="__PUBLIC__/src/css/animate.min.css"> -->
+	</head>
+	<body>
+		
+		<div id="start">
+			<div class="start-btn">
+				<img src="__PUBLIC__/src/images/start-btn.png">
+			</div>
+		</div>
+
+		<div id="index" style="display: none">
+			
+			<div class="pic-container">
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+				<div class="one-pic"><img src="" /></div>
+			</div>
+
+			<div class="time-counter-container" style="display: none">
+				<img src="__PUBLIC__/src/images/clock/0.png">
+				<img src="__PUBLIC__/src/images/clock/0.png">
+				<img src="__PUBLIC__/src/images/clock/colon.png">
+				<img src="__PUBLIC__/src/images/clock/0.png">
+				<img src="__PUBLIC__/src/images/clock/0.png">
+			</div>
+			
+		</div>
+
+		<div id="result" style="display: none">
+			
+			<div class="btn-container">
+				<div class="share-btn">
+					<img src="__PUBLIC__/src/images/share.png">
+				</div>
+				<div class="replay-btn">
+					<img src="__PUBLIC__/src/images/replay.png">
+				</div>
+			</div>
+	
+			<div class="spend-time">
+				<img src="">		
+				<img src="">		
+				<img src="">		
+				<img src="">	
+			</div>
+
+			<div class="rank-info">
+				<img src="">		
+				<img src="">		
+				<img src="">		
+				<img src="">		
+			</div>
+
+		</div>
+
+		
+			
+	
+
+	</body>
+	<script src="__PUBLIC__/src/js/zepto.min.js"></script>
+	<!-- <script src="__PUBLIC__/build/js/index.js"></script> -->
+	<script src="__PUBLIC__/src/js/index.min.js"></script>
+	<script>
+
+		$(function () {
+			document.querySelector('.start-btn').addEventListener('click', function () {
+				game.play();
+			}, false);
+
+			document.querySelector('.replay-btn').addEventListener('click', function () {
+				game.play(true);
+			}, false);
+
+		});
+
+	</script>
+</html>
