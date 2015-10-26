@@ -361,6 +361,8 @@
 				});
 			};
 
+			var 
+
 			return {
 				getRankInfo: getRankInfo,
 				randomGenerate: randomGenerate

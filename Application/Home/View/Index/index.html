@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
 		<meta name="screen-orientation" content="portrait">
 		<title>游戏首页</title>
+		<link rel="stylesheet" href="__PUBLIC__/src/css/animate.css">
 		<link rel="stylesheet" href="__PUBLIC__/src/css/index.min.css">
 	</head>
 	<body>
@@ -85,11 +86,11 @@
 	<script>
 
 		$(function () {
-			document.querySelector('.start-btn').addEventListener('touchend', function () {
+			document.querySelector('.start-btn').addEventListener('click', function () {
 				game.play();
 			}, false);
 
-			document.querySelector('.replay-btn').addEventListener('touchend', function () {
+			document.querySelector('.replay-btn').addEventListener('click', function () {
 				game.play(true);
 			}, false);
 		});
