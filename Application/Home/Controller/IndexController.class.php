@@ -11,33 +11,33 @@ class IndexController extends Controller {
 	private $secret;
 	public function index(){
       	$this->secret =sha1(sha1($this->time).md5($this->string)."redrock");
+		$signature = array(
+			'timestamp' => $this->time,
+			'string' => $this->string,
+			'signature' => $this->secret
+		);
+		$this->assign('signature', $signature);
     	if (session('code')) {
         	$this->getOpenId();
-    			$this->display();   		
-    		}else{
-	    		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
-	            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
-				Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-				$code = I('code');//获取code
-				session('code',$code);
-				$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
-				$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
-				$array = get_object_vars($jsondecode);//转换成数组
-				$openid = $array['openid'];//输出openid 
-				session('openid',$openid);
-				$this->getOpenId();
-				$signature = array(
-					'timestamp' => $this->time,
-					'string' => $this->string,
-					'signature' => $this->secret
-				);
-				$this->assign('signature', $signature);
-					$this->display();
-					if (!session('openid')) {
-					$this->error('网络连接错误');
-				}
-        	}
-	    }
+    		$this->display();   		
+		}else{
+    		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
+            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
+			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
+			$code = I('code');//获取code
+			session('code',$code);
+			$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
+			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
+			$array = get_object_vars($jsondecode);//转换成数组
+			$openid = $array['openid'];//输出openid 
+			session('openid',$openid);
+			$this->getOpenId();
+			$this->display();
+			if (!session('openid')) {
+				$this->error('网络连接错误');
+			}
+        }
+	}
 	//ajax请求
 	public function getRank() {
 		$this->spendTime = I('spendTime');
@@ -71,16 +71,16 @@ class IndexController extends Controller {
 			$openid = $this->curl_api($url1, $t1);
 			session('openid', $openid);
 	    }
-    $t2 = array(
-      	'string' => $this->string,
-		'token' => 'gh_68f0a1ffc303',
-		'timestamp' => $this->time,
-		'secret' => $this->secret,
-		'openid' => $openid,
-    );
-    $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
-    $result = $this->curl_api($url2, $t2);
-    session('username', $result->data->nickname);
+	    $t2 = array(
+	      	'string' => $this->string,
+			'token' => 'gh_68f0a1ffc303',
+			'timestamp' => $this->time,
+			'secret' => $this->secret,
+			'openid' => $openid,
+	    );
+	    $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
+	    $result = $this->curl_api($url2, $t2);
+	    session('username', $result->data->nickname);
     
 	}
 
