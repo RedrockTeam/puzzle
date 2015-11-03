@@ -9,15 +9,12 @@ class IndexController extends Controller {
 	private $time;
 	private $string;
 	private $secret;
+	private $ticket;
 	public function index(){
 		
     	if (session('code')) {
         	$this->getOpenId();
-        	$signature = array(
-				'timestamp' => $this->time,
-				'string' => $this->string,
-				'signature' => $this->secret
-			);
+        	$signature = $this->JSSDKSignature();
 			$this->assign('signature', $signature);
     		$this->display();   		
 		}else{
@@ -30,13 +27,14 @@ class IndexController extends Controller {
 			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
 			$array = get_object_vars($jsondecode);//转换成数组
 			$openid = $array['openid'];//输出openid 
+			$access_token = $array['access_token'];//输出access_token
+			$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='$access_token'&type=jsapi');
+			$jsondecode2 = json_decode($jsapi);
+			$array2 = get_object_vars($jsondecode2);
+			$this->ticket = $array['ticket'];//输出ticket
 			session('openid',$openid);
 			$this->getOpenId();
-			$signature = array(
-				'timestamp' => $this->time,
-				'string' => $this->string,
-				'signature' => $this->secret
-			);
+			$signature = $this->JSSDKSignature();
 			$this->assign('signature', $signature);
 			$this->display();
 			if (!session('openid')) {
@@ -44,6 +42,31 @@ class IndexController extends Controller {
 			}
         }
 	}
+	public function JSSDKSignature(){
+	        $string = $this->string;
+	        $jsapi_ticket =  $this->ticket;
+	        $data['jsapi_ticket'] = $jsapi_ticket;
+	        $data['noncestr'] = $this->string;
+	        $data['timestamp'] = $this->time;
+	        $data['url'] = 'http://'.$_SERVER['HTTP_HOST'].__SELF__;//生成当前页面url
+	        $data['signature'] = sha1($this->ToUrlParams($data));
+	        return $data;
+	    }
+    private function ToUrlParams($urlObj){
+        $buff = "";
+        foreach ($urlObj as $k => $v) {
+            if($k != "signature") {
+                $buff .= $k . "=" . $v . "&";
+            }
+        }
+        $buff = trim($buff, "&");
+        return $buff;
+    }
+
+
+
+
+
 	//ajax请求
 	public function getRank() {
 		$this->spendTime = I('spendTime');
