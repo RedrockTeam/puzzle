@@ -10,3 +10,4 @@ Application/Admin/View/.DS_Store
 Public/node_modules
 Public/Gulpfile.js
 Public/package.json
+Public/build
