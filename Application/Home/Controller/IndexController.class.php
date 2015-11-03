@@ -10,7 +10,6 @@ class IndexController extends Controller {
 	private $string;
 	private $secret;
 	public function index(){
-      	$this->secret =sha1(sha1($this->time).md5($this->string)."redrock");
 		$signature = array(
 			'timestamp' => $this->time,
 			'string' => $this->string,
@@ -52,13 +51,14 @@ class IndexController extends Controller {
   //openid获取
   	private function getOpenId(){
 		$code = session('code');
-	    $time = time();
+	    $this->time = time();
 	    $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
 	    $this->string='';
 	    for($i=0;$i<16;$i++){
 	    	$num = mt_rand(0,61);
 	        $this->string .= $str[$num];
 	    }
+      	$this->secret =sha1(sha1($this->time).md5($this->string)."redrock");
 	    if (!session('openid')){
 		    $t1 = array(
 		      	'string' => $this->string,
