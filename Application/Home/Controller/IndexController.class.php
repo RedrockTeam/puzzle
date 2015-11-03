@@ -15,7 +15,10 @@ class IndexController extends Controller {
         $this->getOpenId();
     		$this->display();   		
     		}else{
-          Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=http://www.xx.com/index&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
+
+    		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
+            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
+          Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
           $code = I('code');//获取code
           session('code',$code);
           $weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
