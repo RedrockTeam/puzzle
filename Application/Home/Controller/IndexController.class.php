@@ -10,14 +10,15 @@ class IndexController extends Controller {
 	private $string;
 	private $secret;
 	public function index(){
-		$signature = array(
-			'timestamp' => $this->time,
-			'string' => $this->string,
-			'signature' => $this->secret
-		);
-		$this->assign('signature', $signature);
+		
     	if (session('code')) {
         	$this->getOpenId();
+        	$signature = array(
+				'timestamp' => $this->time,
+				'string' => $this->string,
+				'signature' => $this->secret
+			);
+			$this->assign('signature', $signature);
     		$this->display();   		
 		}else{
     		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
@@ -31,6 +32,12 @@ class IndexController extends Controller {
 			$openid = $array['openid'];//输出openid 
 			session('openid',$openid);
 			$this->getOpenId();
+			$signature = array(
+				'timestamp' => $this->time,
+				'string' => $this->string,
+				'signature' => $this->secret
+			);
+			$this->assign('signature', $signature);
 			$this->display();
 			if (!session('openid')) {
 				$this->error('网络连接错误');
@@ -54,7 +61,7 @@ class IndexController extends Controller {
 	    $this->time = time();
 	    $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
 	    $this->string='';
-	    for($i=0;$i<16;$i++){
+	    for($i = 0; $i < 16; $i++){
 	    	$num = mt_rand(0,61);
 	        $this->string .= $str[$num];
 	    }
