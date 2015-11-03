@@ -1,7 +1,7 @@
 
 
 	// 引入 gulp
-	var gulp = require('gulp'); 
+	var gulp = require('gulp');
 
 	// 引入组件
 	var sass = require('gulp-sass');

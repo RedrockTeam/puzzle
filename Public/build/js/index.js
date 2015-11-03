@@ -4,10 +4,9 @@
 		sliderImgPath = 'Public/src/images/slider/';
 
 	var random, randomArray = [];
-
+	
 	// 游戏主程序
 	var game = (function () {
-
 		var	rankInfo,
 			prevIndex, // 每次交换时选择的第一个滑块的索引
 			trueCount, // 滑块在正确位置的数目
@@ -15,7 +14,6 @@
 			tempValue; // 临时变量
 
 		var $container = $('.pic-container');
-
 		// 载入游戏
 		var init = function (isReplay) {
 			// 
@@ -333,7 +331,6 @@
 		};
 	})();
 
-
 	// 工具函数
 	var util = (function () {
 		
@@ -361,11 +358,9 @@
 				}
 			});
 		};
-
 		return {
 			getRankInfo: getRankInfo,
 			randomGenerate: randomGenerate
 		};
-
 	})();
 
