@@ -1,5 +1,4 @@
 #gnore Files
-ThinkPHP
 .idea
 .DS_Store
 Application/Runtime
