@@ -81,7 +81,7 @@ class IndexController extends Controller {
     );
     $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
     $result = $this->curl_api($url2, $t2);
-    session('username', $result['data']['nickname']);
+    session('username', $result->data->nickname);
     
 	}
 
