@@ -28,7 +28,7 @@ class IndexController extends Controller {
 			$array = get_object_vars($jsondecode);//转换成数组
 			$openid = $array['openid'];//输出openid 
 			$access_token = $array['access_token'];//输出access_token
-			$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='$access_token'&type=jsapi');
+			$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi');
 			$jsondecode2 = json_decode($jsapi);
 			$array2 = get_object_vars($jsondecode2);
 			$this->ticket = $array['ticket'];//输出ticket
