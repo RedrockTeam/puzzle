@@ -27,13 +27,13 @@ class IndexController extends Controller {
 			$array2 = get_object_vars($jsondecode2);
 			$this->ticket = $array2['ticket'];//输出ticket
 			session('openid',$openid);
+			if (!session('openid')) {
+				$this->error('网络连接错误');
+			}
 			$this->getOpenId();
 			$signature = $this->JSSDKSignature();
 			$this->assign('signature', $signature);
 			$this->display();
-			if (!session('openid')) {
-				$this->error('网络连接错误');
-			}
         }else{
         	$this->error('网络连接错误');
         }
