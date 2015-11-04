@@ -75,8 +75,7 @@ class IndexController extends Controller {
     	));
     	
     }
-    private function info()
-    {
+    private function info(){
     	$this->time = time();
 	    $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
 	    $this->string='';
@@ -98,8 +97,7 @@ class IndexController extends Controller {
 	    $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
 	    $result = $this->curl_api($url2, $t2);
 	    session('username', $result->data->nickname);
-    
-
+	}
 
 	/*curl通用函数*/
   private function curl_api($url, $data=''){
