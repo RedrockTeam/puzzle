@@ -3,6 +3,7 @@
   use Think\Controller;
 
 class IndexController extends Controller {
+	private $code;
   	private $spendTime;//花费时间
 	private $number;//比你强的人数
 	private $list;//排名名单
@@ -14,27 +15,30 @@ class IndexController extends Controller {
 		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
         $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
 		Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-		$code = I('code');//获取code
+		$this->code = I('code');//获取code
 		session('code',$code);
-		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
-		$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
-		$array = get_object_vars($jsondecode);//转换成数组
-		$openid = $array['openid'];//输出openid 
-		$access_token = $array['access_token'];//输出access_token
-		$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi');
-		$jsondecode2 = json_decode($jsapi);
-		$array2 = get_object_vars($jsondecode2);
-		$this->ticket = $array2['ticket'];//输出ticket
-		session('openid',$openid);
-		if (!session('openid')) {
-			$this->error('网络连接错误');
+		if (session('code')) {
+			$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$this->code."&grant_type=authorization_code");//通过code换取网页授权access_token
+			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
+			$array = get_object_vars($jsondecode);//转换成数组
+			$openid = $array['openid'];//输出openid 
+			$access_token = $array['access_token'];//输出access_token
+			$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi');
+			$jsondecode2 = json_decode($jsapi);
+			$array2 = get_object_vars($jsondecode2);
+			$this->ticket = $array2['ticket'];//输出ticket
+			session('openid',$openid);
+			if (session('openid')) {
+				$this->getOpenId();
+				$signature = $this->JSSDKSignature();
+				$this->assign('signature', $signature);
+				$this->display();
+			}else {
+				$this->error('没有openid');
+			}
+		}else {
+			$this->error('没有code');
 		}
-		$this->getOpenId();
-		$signature = $this->JSSDKSignature();
-		$this->assign('signature', $signature);
-		$this->display();
-        
-	}
 	public function JSSDKSignature(){
 	        $string = $this->string;
 	        $jsapi_ticket =  $this->ticket;
@@ -73,7 +77,7 @@ class IndexController extends Controller {
     }
   //openid获取
   	private function getOpenId(){
-		$code = session('code');
+		
 	    $this->time = time();
 	    $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
 	    $this->string='';
@@ -88,7 +92,7 @@ class IndexController extends Controller {
 				'token' => 'gh_68f0a1ffc303',
 				'timestamp' => $this->time,
 				'secret' => $this->secret,
-				'code' => $code,
+				'code' => $this->code,
 		    );
 			$url1 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOauth";
 			$openid = $this->curl_api($url1, $t1);
