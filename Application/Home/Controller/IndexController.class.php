@@ -31,7 +31,7 @@ class IndexController extends Controller {
 			$jsapi = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi');
 			$jsondecode2 = json_decode($jsapi);
 			$array2 = get_object_vars($jsondecode2);
-			$this->ticket = $array['ticket'];//输出ticket
+			$this->ticket = $array2['ticket'];//输出ticket
 			session('openid',$openid);
 			$this->getOpenId();
 			$signature = $this->JSSDKSignature();
