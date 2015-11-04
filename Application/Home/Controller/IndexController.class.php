@@ -16,7 +16,7 @@ class IndexController extends Controller {
         $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
 		Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
 		$this->code = I('code');//获取code
-		session('code',$code);
+		session('code',$this->code);
 		if (session('code')) {
 			$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$this->code."&grant_type=authorization_code");//通过code换取网页授权access_token
 			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
