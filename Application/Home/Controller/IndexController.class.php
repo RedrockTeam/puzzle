@@ -11,13 +11,7 @@ class IndexController extends Controller {
 	private $secret;
 	private $ticket;
 	public function index(){
-		
-    	if (session('code')) {
-        	$this->getOpenId();
-        	$signature = $this->JSSDKSignature();
-			$this->assign('signature', $signature);
-    		$this->display();   		
-		}else{
+    	if (!session('code')) {
     		$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
             $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
 			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
@@ -40,6 +34,8 @@ class IndexController extends Controller {
 			if (!session('openid')) {
 				$this->error('网络连接错误');
 			}
+        }else{
+        	$this->error('网络连接错误');
         }
 	}
 	public function JSSDKSignature(){
