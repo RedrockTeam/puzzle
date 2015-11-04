@@ -19,6 +19,7 @@ class IndexController extends Controller {
 			$this->code = I('code');//获取code
 			session('code',$this->code);
 		}
+		$this->info();
 		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=$this->secret&code=".$this->code."&grant_type=authorization_code");//通过code换取网页授权access_token
 		$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
 		$array = get_object_vars($jsondecode);//转换成数组
@@ -74,10 +75,9 @@ class IndexController extends Controller {
     	));
     	
     }
-  //openid获取
-  	private function getOpenId(){
-		
-	    $this->time = time();
+    private function info()
+    {
+    	$this->time = time();
 	    $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
 	    $this->string='';
 	    for($i = 0; $i < 16; $i++){
@@ -85,18 +85,9 @@ class IndexController extends Controller {
 	        $this->string .= $str[$num];
 	    }
       	$this->secret =sha1(sha1($this->time).md5($this->string)."redrock");
-	    if (!session('openid')){
-		    $t1 = array(
-		      	'string' => $this->string,
-				'token' => 'gh_68f0a1ffc303',
-				'timestamp' => $this->time,
-				'secret' => $this->secret,
-				'code' => $this->code,
-		    );
-			$url1 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOauth";
-			$openid = $this->curl_api($url1, $t1);
-			session('openid', $openid);
-	    }
+    }
+    //username获取
+  	private function getOpenId(){
 	    $t2 = array(
 	      	'string' => $this->string,
 			'token' => 'gh_68f0a1ffc303',
@@ -108,7 +99,6 @@ class IndexController extends Controller {
 	    $result = $this->curl_api($url2, $t2);
 	    session('username', $result->data->nickname);
     
-	}
 
 
 	/*curl通用函数*/
