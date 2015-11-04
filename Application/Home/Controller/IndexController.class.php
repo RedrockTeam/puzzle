@@ -39,6 +39,7 @@ class IndexController extends Controller {
 		}else {
 			$this->error('没有code');
 		}
+	}
 	public function JSSDKSignature(){
 	        $string = $this->string;
 	        $jsapi_ticket =  $this->ticket;
