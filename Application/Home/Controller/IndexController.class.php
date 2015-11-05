@@ -133,7 +133,7 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket";
 	    $result = $this->curl_api($url, $t);
-	    $this->ticket = $result->data;
+	    $this->jsapi_ticket = $result->data;
 	}
 	private function getOpenid(){
 		$t = array(
