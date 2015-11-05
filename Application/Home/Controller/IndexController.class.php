@@ -85,6 +85,8 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/openidVerify";
 	    $result = $this->curl_api($url, $t);
+	    print_r($t);
+	    print_r($result);
 	    if ($result->info == 'subscribe') {
 	    	session('verify', $result->info);
 	    }else{
