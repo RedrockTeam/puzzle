@@ -145,7 +145,9 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
 	    $result = $this->curl_api($url, $t);
-	    $this->openid = $result->openid;
+	    var_dump($result);
+	    print_r($result);
+	    //$this->openid = $result->openid;
 	}
 	/*curl通用函数*/
 	private function curl_api($url, $data=''){
