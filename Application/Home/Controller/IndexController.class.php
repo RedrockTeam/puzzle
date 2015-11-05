@@ -2,7 +2,6 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-	private $code;
 	private $openid;
   	private $spendTime;//花费时间
 	private $number;//比你强的人数
@@ -12,25 +11,29 @@ class IndexController extends Controller {
 	private $secret;//签名
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
-		if (!$this->code) {
+		if (!I('code')) {
 			$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
 	        $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
 			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-			$this->code = I('code');//获取code
+			session('code') = I('code');//获取code
 		}
 		$this->info();
-		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$this->code."&grant_type=authorization_code");//通过code换取网页授权access_token
+		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".I('code')."&grant_type=authorization_code");//通过code换取网页授权access_token
 		print_r($weixin);
 		$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
 		$array = get_object_vars($jsondecode);//转换成数组
 		$this->openid = $array['openid'];//输出openid
-		$this->getVerify();
-		$this->getTicket();
-		$this->getName();
-		$this->getStuid();
-		$signature = $this->JSSDKSignature();
-		$this->assign('signature', $signature);
-		$this->display();
+		if ($this->openid) {
+			$this->getVerify();
+			$this->getTicket();
+			$this->getName();
+			$this->getStuid();
+			$signature = $this->JSSDKSignature();
+			$this->assign('signature', $signature);
+			$this->display();
+		}else {
+			$this->error('网络错误，请重试');
+		}
 	}
 	//ajax请求
 	public function getRank() {
@@ -86,8 +89,6 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/openidVerify";
 	    $result = $this->curl_api($url, $t);
-	    print_r($t);
-	    print_r($result);
 	    if ($result->info == 'subscribe') {
 	    	session('verify', $result->info);
 	    }else{
