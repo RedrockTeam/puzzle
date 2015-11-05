@@ -11,27 +11,28 @@ class IndexController extends Controller {
 	private $secret;//签名
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
-		if (!I('get.code')){
-			$qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
+		if (isset($_GET['code'])){
+		    $code = $_GET['code'];
+		    $this->info();
+			$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
+			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
+			$array = get_object_vars($jsondecode);//转换成数组
+			$this->openid = $array['openid'];//输出openid
+			if (!$this->openid) {
+				$this->error('没有openid');
+			}
+			//$this->getVerify();
+			$this->getTicket();
+			$this->getName();
+			$this->getStuid();
+			$signature = $this->JSSDKSignature();
+			$this->assign('signature', $signature);
+			$this->display();
+		}else{
+		    $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
 	        $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
 			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-	    }
-	    $code = I('get.code');
-		$this->info();
-		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
-		$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
-		$array = get_object_vars($jsondecode);//转换成数组
-		$this->openid = $array['openid'];//输出openid
-		if (!$this->openid) {
-			$this->error('没有openid');
 		}
-		//$this->getVerify();
-		$this->getTicket();
-		$this->getName();
-		$this->getStuid();
-		$signature = $this->JSSDKSignature();
-		$this->assign('signature', $signature);
-		$this->display();
 	}
 	//ajax请求
 	public function getRank() {
