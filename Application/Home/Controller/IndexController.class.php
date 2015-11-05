@@ -122,18 +122,6 @@ class IndexController extends Controller {
 	    $result = $this->curl_api($url, $t);
 	    session('username', $result->data->nickname);
 	}
-	private function getOpenid(){
-	    $t = array(
-	      	'string' => $this->string,
-			'token' => 'gh_68f0a1ffc303',
-			'timestamp' => $this->time,
-			'secret' => $this->secret,
-			'code' => $this->code,
-	    );
-	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
-	    $result = $this->curl_api($url, $t);
-	    session('openid', $result->openid);
-	}
 	private function getTicket(){
 		$t = array(
       	'string' => $this->string,
