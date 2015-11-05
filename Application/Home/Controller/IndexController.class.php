@@ -27,13 +27,15 @@ class IndexController extends Controller {
 		session('openid',$this->openid);
 		if (session('openid')) {
 			$this->getVerify();
-			if (session('verify') == 'subscribe') {
+			if (session('verify')) {
 				$this->getTicket();
 				$this->getName();
 				$this->getStuid();
 				$signature = $this->JSSDKSignature();
 				$this->assign('signature', $signature);
 				$this->display();
+			}else{
+				$this->error('没有关注小帮手');
 			}
 		}else{
 			$this->error('网络连接错误');
