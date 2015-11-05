@@ -11,8 +11,8 @@ class IndexController extends Controller {
 	private $secret;//签名
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
-		if (isset($_GET['code'])){
-		    $code = $_GET['code'];
+		if (isset(I('get.code'))){
+		    $code = I('get.code');
 		    $this->info();
 			$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
 			$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
