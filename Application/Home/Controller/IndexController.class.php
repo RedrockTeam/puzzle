@@ -13,7 +13,7 @@ class IndexController extends Controller {
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
 		$this->code = I('get.code'); 
-		if ($code !=null || $code != ''){ 
+		if ($this->code !=null || $this->code != ''){ 
 		    $this->code = I('get.code');
 		    $this->info();
 		    $this->getOpenid();
