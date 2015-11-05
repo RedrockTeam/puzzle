@@ -20,10 +20,10 @@ class IndexController extends Controller {
 			if (!$this->openid) {
 				$this->error('没有openid');
 			}
-			$this->getVerify();
+			//$this->getVerify();
 			$this->getTicket();
 			$this->getName();
-			$this->getStuid();
+			//$this->getStuid();
 			$signature = $this->JSSDKSignature();
 			$this->assign('signature', $signature);
 			$this->display();
