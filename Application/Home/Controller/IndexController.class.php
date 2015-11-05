@@ -18,6 +18,9 @@ class IndexController extends Controller {
             $weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
             $jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
             $array = get_object_vars($jsondecode);//转换成数组
+            var_dump($code);
+            var_dump($weixin);
+            return;
             $this->openid = $array['openid'];//输出openid
             if (!$this->openid) {
                 $this->error('没有openid');
