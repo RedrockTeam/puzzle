@@ -20,26 +20,17 @@ class IndexController extends Controller {
 			session('code',$this->code);
 		}
 		$this->info();
-		/*$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=这里是你的APPID&secret=这里是你的SECRET&code=".$code."&grant_type=authorization_code");//通过code换取网页授权access_token
+		$weixin =  file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx81a4a4b77ec98ff4&secret=".$this->secret."&code=".$this->code."&grant_type=authorization_code");//通过code换取网页授权access_token
 		$jsondecode = json_decode($weixin); //对JSON格式的字符串进行编码
 		$array = get_object_vars($jsondecode);//转换成数组
-		$openid = $array['openid'];//输出openid*/
-		$this->getOpenid();
-		if (session('openid')) {
-			$this->getVerify();
-			if (session('verify')) {
-				$this->getTicket();
-				$this->getName();
-				$this->getStuid();
-				$signature = $this->JSSDKSignature();
-				$this->assign('signature', $signature);
-				$this->display();
-			}else{
-				$this->error('没有关注小帮手');
-			}
-		}else{
-			$this->error('网络连接错误');
-		}
+		$this->openid = $array['openid'];//输出openid
+		$this->getVerify();
+		$this->getTicket();
+		$this->getName();
+		$this->getStuid();
+		$signature = $this->JSSDKSignature();
+		$this->assign('signature', $signature);
+		$this->display();
 	}
 	//ajax请求
 	public function getRank() {
