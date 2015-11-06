@@ -18,12 +18,12 @@ class IndexController extends Controller {
 		    $this->info();
 		    $this->getOpenid();
 			if (!$this->openid) {
-				$this->error('没有openid');
+				$this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
 			}
 			//$this->getVerify();
 			$this->getTicket();
 			$this->getName();
-			//$this->getStuid();
+			$this->getStuid();
 			$signature = $this->JSSDKSignature();
 			$this->assign('signature', $signature);
 			$this->display();
