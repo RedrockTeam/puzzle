@@ -26,6 +26,7 @@ class IndexController extends Controller {
 			$this->getName();
 			$this->getStuid();
 			$signature = $this->JSSDKSignature();
+			$this->assign('openid', $this->openid);
 			$this->assign('signature', $signature);
 			$this->display();
 		}else{
