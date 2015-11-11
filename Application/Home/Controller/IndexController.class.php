@@ -166,6 +166,7 @@ class IndexController extends Controller {
 	}
 	//保存分数
 	public function saveRank(){
+		$_openid = $this->openid;
 	  	$m = M('score');
 		$condition['openid'] = $this->openid;
 		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
@@ -176,7 +177,7 @@ class IndexController extends Controller {
 				$m->data($data)->where($condition)->save();
 			}
 		}else {
-			$data['openid'] = 'ouRCyjtYAH4JjmhwUCJ9u6ymWa74';
+			$data['openid'] = $_openid;
 			$data['username'] = session('username');
 			$data['stuId'] = session('stuId');
 			$m->data($data)->add();
