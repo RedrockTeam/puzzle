@@ -44,7 +44,7 @@ class IndexController extends Controller {
    		//$this->rankList();
     	$this->ajaxReturn(array(
     		'status' => 200,
-    		'data' => array_reverse(str_split($_openid, 1))
+    		'data' => array_reverse(str_split(session('_openid'), 1))
     	));
     }
 
@@ -141,11 +141,11 @@ class IndexController extends Controller {
 	}
 	private function getOpenid(){
 		$t = array(
-      	'string' => $this->string,
-		'token' => 'gh_68f0a1ffc303',
-		'timestamp' => $this->time,
-		'secret' => $this->secret,
-		'code' => $this->code,
+	      	'string' => $this->string,
+			'token' => 'gh_68f0a1ffc303',
+			'timestamp' => $this->time,
+			'secret' => $this->secret,
+			'code' => $this->code,
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
 	    $result = $this->curl_api($url, $t);
