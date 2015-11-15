@@ -39,12 +39,12 @@ class IndexController extends Controller {
 	//ajax请求
 	public function getRank() {
 		$this->spendTime = I('spendTime');
-		$_openid = $this->getOpenid();
-		$this->saveRank($_openid);
+		// $_openid = $this->getOpenid();
+		$_openid = $this->saveRank($_openid);
    		//$this->rankList();
     	$this->ajaxReturn(array(
     		'status' => 200,
-    		'data' => array_reverse(str_split($this->number, 1))
+    		'data' => array_reverse(str_split($_openid, 1))
     	));
     }
 
@@ -169,23 +169,24 @@ class IndexController extends Controller {
 	}
 	//保存分数
 	public function saveRank($_openid){
-		echo session('_openid').'---'.$this->getOpenid();
-	  	$m = M('score');
-		$condition['openid'] = session('_openid');
-		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
-		$data['time'] = strtotime(Date("Y-m-d H:i:s")); 
-		$judge = $m->where($condition)->find();
-		if ($judge) {
-			if ($judge['score'] > $data['score']) {
-				$m->data($data)->where($condition)->save();
-			}
-		}else {
-			$data['openid'] = session('_openid');
-			$data['username'] = session('username');
-			$data['stuId'] = session('stuId');
-			$m->data($data)->add();
-		}
-		$this->number = $m->where('score' .'<='. $data['score'],'AND','time' .'<'. $data['time'])->count();
+		// echo session('_openid').'---'.$this->getOpenid();
+	 //  	$m = M('score');
+		// $condition['openid'] = session('_openid');
+		// $data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
+		// $data['time'] = strtotime(Date("Y-m-d H:i:s")); 
+		// $judge = $m->where($condition)->find();
+		// if ($judge) {
+		// 	if ($judge['score'] > $data['score']) {
+		// 		$m->data($data)->where($condition)->save();
+		// 	}
+		// }else {
+		// 	$data['openid'] = session('_openid');
+		// 	$data['username'] = session('username');
+		// 	$data['stuId'] = session('stuId');
+		// 	$m->data($data)->add();
+		// }
+		// $this->number = $m->where('score' .'<='. $data['score'],'AND','time' .'<'. $data['time'])->count();
+		return $this->getOpenid();
 	}
 	//排名
 	public function rankList(){
