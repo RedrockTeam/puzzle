@@ -87,7 +87,7 @@
 	<script>
 
 		$(function () {
-			// var openid = "{$openid}";
+			var openid = "{$openid}";
 			document.querySelector('.start-btn').addEventListener('click', function () {
 				game.play();
 			}, false);
@@ -97,7 +97,7 @@
 			}, false);
 
 			document.querySelector('.time-counter-container').addEventListener('click', function () {
-				game.stop();
+				game.stop(openid);
 			}, false);
 
 			wx.config({

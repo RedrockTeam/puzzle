@@ -39,12 +39,10 @@ class IndexController extends Controller {
 	public function getRank() {
 		$this->spendTime = I('post.spendTime');
 		$_openid = I('post.openid');
-		// $_openid = $this->getOpenid();
 		$this->saveRank($_openid);
-   		//$this->rankList();
     	$this->ajaxReturn(array(
     		'status' => 200,
-    		'data' => array_reverse(str_split($_openid, 1))
+    		'data' => array_reverse(str_split($this->number, 1))
     	));
     }
 
@@ -167,10 +165,9 @@ class IndexController extends Controller {
 		return $contents;
 	}
 	//保存分数
-	public function saveRank(){
-		$_openid = $this->openid;
+	public function saveRank($_openid){
 	  	$m = M('score');
-		$condition['openid'] = $this->openid;
+		$condition['openid'] = $_openid;
 		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
 		$data['time'] = strtotime(Date("Y-m-d H:i:s")); 
 		$judge = $m->where($condition)->find();
