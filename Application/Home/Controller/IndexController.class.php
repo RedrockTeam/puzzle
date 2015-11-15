@@ -179,7 +179,7 @@ class IndexController extends Controller {
 				$m->data($data)->where($condition)->save();
 			}
 		}else {
-			$data['openid'] = session('openid');
+			$data['openid'] = 'ouRCyjvDVpaLFqp60QDIQHiNqVIk';
 			$data['username'] = session('username');
 			$data['stuId'] = session('stuId');
 			$m->data($data)->add();
