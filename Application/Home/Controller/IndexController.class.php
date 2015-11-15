@@ -44,7 +44,7 @@ class IndexController extends Controller {
    		//$this->rankList();
     	$this->ajaxReturn(array(
     		'status' => 200,
-    		'data' => array_reverse(str_split(session('_openid'), 1))
+    		'data' => array_reverse(str_split(session('stuId'), 1))
     	));
     }
 
