@@ -39,7 +39,8 @@ class IndexController extends Controller {
 	//ajax请求
 	public function getRank() {
 		$this->spendTime = I('spendTime');
-		$this->saveRank();
+		$_openid = $this->getOpenid();
+		$this->saveRank($_openid);
    		//$this->rankList();
     	$this->ajaxReturn(array(
     		'status' => 200,
