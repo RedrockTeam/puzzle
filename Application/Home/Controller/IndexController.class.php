@@ -17,16 +17,16 @@ class IndexController extends Controller {
 		if ($this->code !=null || $this->code != ''){ 
 		    $this->code = I('get.code');
 		    $this->info();
-		    $this->getOpenid();
-			if (!$this->openid) {
+		    $_openid = $this->getOpenid();
+			if (!$_openid) {
 				$this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
 			}
 			//$this->getVerify();
 			$this->getTicket();
-			$this->getName();
-			$this->getStuid();
+			$this->getName($_openid);
+			$this->getStuid($_openid);
 			$signature = $this->JSSDKSignature();
-			$this->assign('openid', $this->openid);
+			$this->assign('openid', $_openid);
 			$this->assign('signature', $signature);
 			$this->display();
 		}else{
@@ -35,6 +35,7 @@ class IndexController extends Controller {
 			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
 		}
 	}
+
 	//ajax请求
 	public function getRank() {
 		$this->spendTime = I('spendTime');
@@ -96,13 +97,13 @@ class IndexController extends Controller {
 	    }
 	}
 	//获取学号
-	private function getStuid(){
+	private function getStuid($_openid){
 	    $t = array(
 	      	'string' => $this->string,
 			'token' => 'gh_68f0a1ffc303',
 			'timestamp' => $this->time,
 			'secret' => $this->secret,
-			'openid' => $this->openid,
+			'openid' => $_openid,
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
 	    $result = $this->curl_api($url, $t);
@@ -113,13 +114,13 @@ class IndexController extends Controller {
 	    }
 	}
     //username获取
-  	private function getName(){
+  	private function getName($_openid){
 	    $t = array(
 	      	'string' => $this->string,
 			'token' => 'gh_68f0a1ffc303',
 			'timestamp' => $this->time,
 			'secret' => $this->secret,
-			'openid' => $this->openid,
+			'openid' => $_openid,
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
 	    $result = $this->curl_api($url, $t);
@@ -147,7 +148,7 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
 	    $result = $this->curl_api($url, $t);
-	    $this->openid = $result->data->openid;
+	    return $result->data->openid;
 	}
 	/*curl通用函数*/
 	private function curl_api($url, $data=''){
@@ -165,10 +166,9 @@ class IndexController extends Controller {
 		return $contents;
 	}
 	//保存分数
-	public function saveRank(){
-		$_openid = $this->openid;
+	public function saveRank($_openid){
 	  	$m = M('score');
-		$condition['openid'] = $this->openid;
+		$condition['openid'] = $_openid;
 		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
 		$data['time'] = strtotime(Date("Y-m-d H:i:s")); 
 		$judge = $m->where($condition)->find();
