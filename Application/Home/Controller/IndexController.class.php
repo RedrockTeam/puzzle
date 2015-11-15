@@ -46,8 +46,8 @@ class IndexController extends Controller {
     		'status' => 200,
     		'data' => array_reverse(str_split($this->number, 1))
     	));
-    	
     }
+
     //jssdk-config
 	public function JSSDKSignature(){
         $string = $this->string;
@@ -149,7 +149,7 @@ class IndexController extends Controller {
 	    );
 	    $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
 	    $result = $this->curl_api($url, $t);
-	    session('openid', $result->data->openid);
+	    session('_openid', $result->data->openid);
 	    return $result->data->openid;
 	}
 	/*curl通用函数*/
@@ -170,7 +170,7 @@ class IndexController extends Controller {
 	//保存分数
 	public function saveRank($_openid){
 	  	$m = M('score');
-		$condition['openid'] = session('openid');
+		$condition['openid'] = session('_openid');
 		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
 		$data['time'] = strtotime(Date("Y-m-d H:i:s")); 
 		$judge = $m->where($condition)->find();
@@ -179,7 +179,7 @@ class IndexController extends Controller {
 				$m->data($data)->where($condition)->save();
 			}
 		}else {
-			$data['openid'] = 'ouRCyjvDVpaLFqp60QDIQHiNqVIk';
+			$data['openid'] = session('_openid');
 			$data['username'] = session('username');
 			$data['stuId'] = session('stuId');
 			$m->data($data)->add();
