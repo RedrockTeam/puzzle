@@ -123,8 +123,7 @@
 		};
 
 		return {
-			play: play,
-			stop: stop
+			play: play
 		};
 	})();
 
