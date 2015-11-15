@@ -45,7 +45,7 @@
 		};
 
 		// 结束游戏
-		var stop = function (openid) {
+		var stop = function () {
 			// 计时器停止
 			spendTime = clock.stop();
 			if (spendTime) {
@@ -56,7 +56,7 @@
 			}
 			var data = {
 				spendTime: spendTime,
-				openid: openid
+				openid: $('html').data('openid')
 			};
 			util.getRankInfo('index.php?s=/Home/Index/getRank', data, function (response) {
 				if (response.status === 200) {
