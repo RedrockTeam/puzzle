@@ -45,7 +45,7 @@
 		};
 
 		// 结束游戏
-		var stop = function () {
+		var stop = function (openid) {
 			// 计时器停止
 			spendTime = clock.stop();
 			if (spendTime) {
@@ -54,7 +54,11 @@
 				prevIndex = undefined;
 				$container.off('click', '.one-pic');
 			}
-			util.getRankInfo('index.php?s=/Home/Index/getRank', spendTime, function (response) {
+			var data = {
+				spendTime: spendTime,
+				openid: openid
+			};
+			util.getRankInfo('index.php?s=/Home/Index/getRank', data, function (response) {
 				if (response.status === 200) {
 					// 显示结果页面
 					layout.resultViewShow(spendTime, response.data);
@@ -345,11 +349,11 @@
 		};
 
 		// 得到排名信息
-		var getRankInfo = function (url, spendTime, success) {
+		var getRankInfo = function (url, data, success) {
 			$.ajax({
 				url: url,
 				type: 'POST',
-				data: {spendTime: spendTime},
+				data: data,
 				dataType: 'json',
 				success: success,
 				error: function (xhr, type) {
