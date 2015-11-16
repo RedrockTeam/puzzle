@@ -166,7 +166,7 @@ class IndexController extends Controller {
 	}
 	//保存分数
 	public function saveRank($_openid){
-	  	$m = M('tempZ');
+	  	$m = M('score');
 		$condition['openid'] = $_openid;
 		$data['score'] = '1'.$this->spendTime['kilobit'].$this->spendTime['hundreds'].$this->spendTime['decade'].$this->spendTime['theUnit'];
 		$data['time'] = strtotime(Date("Y-m-d H:i:s")); 
