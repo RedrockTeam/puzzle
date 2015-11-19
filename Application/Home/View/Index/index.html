@@ -111,8 +111,47 @@
 					'onMenuShareQQ',
 					'hideAllNonBaseMenuItem'
 				] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-				});
+			});
 
+			wx.ready(function(){
+		        wx.onMenuShareTimeline({
+		            title: '【@重邮缘】“11.11” 来了，听说你还单着呢！没关系，这里有......', // 分享标题
+		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=401028673&idx=1&sn=be047c29e501192df9432b224ff59044#rd",
+		            imgUrl: "http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png",
+		            success: function () {
+		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		            },
+		            cancel: function () {
+		                // 用户取消分享后执行的回调函数
+		            }
+		        });
+		        wx.onMenuShareAppMessage({
+		            title: '【@重邮缘】“11.11” 来了，听说你还单着呢！没关系，这里有......', // 分享标题
+		            desc: '【@重邮缘】“11.11” 来了，听说你还单着呢！没关系，这里有......', // 分享描述
+		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=401028673&idx=1&sn=be047c29e501192df9432b224ff59044#rd",
+		            imgUrl: 'http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png', // 分享图标
+		            type: '', // 分享类型,music、video或link，不填默认为link
+		            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		            success: function () {
+		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		            },
+		            cancel: function () {
+		                // 用户取消分享后执行的回调函数
+		            }
+		        });
+		        wx.onMenuShareQQ({
+		            title: '【@重邮缘】“11.11” 来了，听说你还单着呢！没关系，这里有......', // 分享标题
+		            desc: '【@重邮缘】“11.11” 来了，听说你还单着呢！没关系，这里有......', // 分享描述
+		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=401028673&idx=1&sn=be047c29e501192df9432b224ff59044#rd",
+		            imgUrl: 'http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png', // 分享图标
+		            success: function () {
+		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		            },
+		            cancel: function () {
+		                // 用户取消分享后执行的回调函数
+		            }
+		        });
+		    });
 
 		});
 
