@@ -99,6 +99,10 @@
 				game.play(true);
 			}, false);
 
+			document.querySelector('.restart-container').addEventListener('click', function () {
+				window.reload();
+			}, false);
+
 			$('.share-btn').on('click', function () {
 				alert('请点击右上角分享');
 			});
