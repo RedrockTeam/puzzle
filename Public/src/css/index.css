@@ -53,12 +53,11 @@ body, html {
       margin-bottom: 5%;
       margin-left: 12%; }
       #index .restart-container{
-        width: 7.8%;
-        height: 20%;
+        width: 13.78%;
+        height: 7.8%;
         position: absolute;
         left: 2.5%;
         top: 4.6%;
-        background-color: red;
       }
 #index .restart-container img {
   border: 0;

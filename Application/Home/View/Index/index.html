@@ -6,7 +6,7 @@
 		<meta name="screen-orientation" content="portrait">
 		<title>游戏首页</title>
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
-		<link rel="stylesheet" href="__PUBLIC__/src/css/index.css">
+		<link rel="stylesheet" href="__PUBLIC__/src/css/index.min.css">
 	</head>
 	<body>
 		
@@ -100,7 +100,7 @@
 			}, false);
 
 			document.querySelector('.restart-container').addEventListener('click', function () {
-				window.reload();
+				location.reload();
 			}, false);
 
 			$('.share-btn').on('click', function () {
