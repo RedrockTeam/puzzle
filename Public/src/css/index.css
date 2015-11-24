@@ -58,6 +58,7 @@ body, html {
         position: absolute;
         left: 2.5%;
         top: 4.6%;
+        background-color: red;
       }
 #index .restart-container img {
   border: 0;
