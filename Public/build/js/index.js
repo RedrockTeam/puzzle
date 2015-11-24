@@ -27,8 +27,8 @@
 		};
 
 		// 开始游戏
-		var play = function (isReplay) {
-			isReplay ? init(isReplay) : init();
+		var play = function (isReplay, again) {
+			init(isReplay, again);
 			$container.on('click', '.one-pic', function () {
 				layout.sliderSelect(this);
 				var nextIndex = $(this).find('img').data('index');
