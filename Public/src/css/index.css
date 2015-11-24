@@ -52,14 +52,12 @@ body, html {
       margin-top: 5%;
       margin-bottom: 5%;
       margin-left: 12%; }
-#index .restart {
+#index .restart img {
   width: 7.8%;
   height: 7.8%;
   position: absolute;
   left: 2.5%;
   top: 4.6%;
-  z-index: 2;
-  background-color: red;
 }
 
 #result {
