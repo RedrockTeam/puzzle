@@ -16,7 +16,7 @@
 		// 载入游戏
 		var init = function (isReplay, again) {
 			if (!isReplay) {
-				layout.indexViewShow();
+				layout.indexViewShow(isReplay);
 			} else {
 				if (!again) {
 					layout.indexViewShow(isReplay);
