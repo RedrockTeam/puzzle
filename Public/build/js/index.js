@@ -17,14 +17,12 @@
 		var init = function (isReplay, again) {
 
 			if (isReplay === false) { // 从主页进去
-				alert('1');
 				layout.indexViewShow(isReplay);
 			} else {
 				if (again === false) { // 从结果页面进入
-					alert('2');
 					layout.indexViewShow(isReplay);
 				} else {
-					stop();
+					stop(again);
 				}
 			}
 			// 修正滑块容器位置
@@ -55,7 +53,7 @@
 		};
 
 		// 结束游戏
-		var stop = function () {
+		var stop = function (again) {
 			// 计时器停止
 			spendTime = clock.stop();
 			if (spendTime) {
@@ -64,18 +62,20 @@
 				prevIndex = undefined;
 				$container.off('click', '.one-pic');
 			}
-			var data = {
-				spendTime: spendTime,
-				openid: $('html').data('openid')
-			};
-			util.getRankInfo('index.php?s=/Home/Index/getRank', data, function (response) {
-				if (response.status === 200) {
-					// 显示结果页面
-					layout.resultViewShow(spendTime, response.data);
-				} else {
-					alert('你的网络有问题, 刚刚的成绩未生效!');
-				}
-			});
+			if (!again) {
+				var data = {
+					spendTime: spendTime,
+					openid: $('html').data('openid')
+				};
+				util.getRankInfo('index.php?s=/Home/Index/getRank', data, function (response) {
+					if (response.status === 200) {
+						// 显示结果页面
+						layout.resultViewShow(spendTime, response.data);
+					} else {
+						alert('你的网络有问题, 刚刚的成绩未生效!');
+					}
+				});
+			}
 		};
 
 		// 交换滑块位置
