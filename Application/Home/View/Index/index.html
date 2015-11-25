@@ -92,11 +92,11 @@
 
 		$(function () {
 			document.querySelector('.start-btn').addEventListener('click', function () {
-				game.play();
+				game.play(false, false);
 			}, false);
 
 			document.querySelector('.replay-btn').addEventListener('click', function () {
-				game.play(true);
+				game.play(true, false);
 			}, false);
 
 			document.querySelector('.restart-container').addEventListener('click', function () {
