@@ -15,11 +15,11 @@
 		var $container = $('.pic-container');
 		// 载入游戏
 		var init = function (isReplay, again) {
-			// layout.indexViewShow();
-			if (!isReplay) {
+
+			if (isReplay === false) { // 从主页进去
 				layout.indexViewShow(isReplay);
 			} else {
-				if (!again) {
+				if (again === false) { // 从结果页面进入
 					layout.indexViewShow(isReplay);
 				}
 			}
