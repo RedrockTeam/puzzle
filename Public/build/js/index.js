@@ -17,9 +17,11 @@
 		var init = function (isReplay, again) {
 
 			if (isReplay === false) { // 从主页进去
+				alert('1');
 				layout.indexViewShow(isReplay);
 			} else {
 				if (again === false) { // 从结果页面进入
+					alert('2');
 					layout.indexViewShow(isReplay);
 				}
 			}
