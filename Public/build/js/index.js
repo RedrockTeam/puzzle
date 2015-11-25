@@ -16,10 +16,10 @@
 		// 载入游戏
 		var init = function (isReplay, again) {
 
-			if (isReplay === false) { // 从主页进去
+			if (!isReplay) { // 从主页进去
 				layout.indexViewShow(isReplay);
 			} else {
-				if (again === false) { // 从结果页面进入
+				if (!again) { // 从结果页面进入
 					layout.indexViewShow(isReplay);
 				} else {
 					stop(again);
