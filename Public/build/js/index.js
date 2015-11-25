@@ -23,6 +23,8 @@
 				if (again === false) { // 从结果页面进入
 					alert('2');
 					layout.indexViewShow(isReplay);
+				} else {
+					stop();
 				}
 			}
 			// 修正滑块容器位置
