@@ -15,14 +15,14 @@
 		var $container = $('.pic-container');
 		// 载入游戏
 		var init = function (isReplay, again) {
-			layout.indexViewShow();
-			// if (!isReplay) {
-			// 	layout.indexViewShow(isReplay);
-			// } else {
-			// 	if (!again) {
-			// 		layout.indexViewShow(isReplay);
-			// 	}
-			// }
+			// layout.indexViewShow();
+			if (!isReplay) {
+				layout.indexViewShow(isReplay);
+			} else {
+				if (!again) {
+					layout.indexViewShow(isReplay);
+				}
+			}
 			// 修正滑块容器位置
 			layout.sliderContainerFix();
 			// 随机分布滑块 
