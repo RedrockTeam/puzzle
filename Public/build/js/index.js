@@ -15,8 +15,12 @@
 		var $container = $('.pic-container');
 		// 载入游戏
 		var init = function (isReplay, again) {
-			if (!again) {
-				layout.indexViewShow(isReplay);
+			if (!isReplay) {
+				layout.indexViewShow();
+			} else {
+				if (!again) {
+					layout.indexViewShow(isReplay);
+				}
 			}
 			// 修正滑块容器位置
 			layout.sliderContainerFix();
