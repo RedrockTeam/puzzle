@@ -13,27 +13,28 @@ class IndexController extends Controller {
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
 
-		$this->code = I('get.code'); 
-		if ($this->code !=null || $this->code != ''){ 
-		    $this->code = I('get.code');
-		    $this->info();
-		    $this->getOpenid();
-			if (!$this->openid) {
-				$this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
-			}
-			//$this->getVerify();
-			$this->getTicket();
-			$this->getName();
-			$this->getStuid();
-			$signature = $this->JSSDKSignature();
-			$this->assign('openid', $this->openid);
-			$this->assign('signature', $signature);
-			$this->display();
-		}else{
-		    $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
-	        $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
-			Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-		}
+		// $this->code = I('get.code'); 
+		// if ($this->code !=null || $this->code != ''){ 
+		//     $this->code = I('get.code');
+		//     $this->info();
+		//     $this->getOpenid();
+		// 	if (!$this->openid) {
+		// 		$this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
+		// 	}
+		// 	//$this->getVerify();
+		// 	$this->getTicket();
+		// 	$this->getName();
+		// 	$this->getStuid();
+		// 	$signature = $this->JSSDKSignature();
+		// 	$this->assign('openid', $this->openid);
+		// 	$this->assign('signature', $signature);
+		// 	$this->display();
+		// }else{
+		//     $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING']:$_SERVER['QUERY_STRING'];
+	 //        $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
+		// 	Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
+		// }
+		$this->display();
 	}
 	//ajax请求
 	public function getRank() {
