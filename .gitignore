@@ -8,7 +8,5 @@ Application/.DS_Store
 Application/Admin/.DS_Store
 Application/Admin/View/.DS_Store
 Public/node_modules
-Public/Gulpfile.js
 Public/package.json
 Public/build/images
-Public/build/scss

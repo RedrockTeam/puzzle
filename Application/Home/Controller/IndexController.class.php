@@ -12,6 +12,8 @@ class IndexController extends Controller {
 	private $secret;//签名
 	private $jsapi_ticket;//jsapi-config
 	public function index(){
+		$this->display();
+		return;
 
 		$this->code = I('get.code'); 
 		if ($this->code !=null || $this->code != ''){ 

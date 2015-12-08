@@ -192,7 +192,7 @@
 		var sliderRandomSort = function () {
 			$('.one-pic').css({
 				float: 'left',
-				height: ($('.pic-container').height()) / 6,
+				height: ($('.pic-container').height()) / 4,
 				width: ($('.pic-container').width() - 1) / 3
 			});
 			
@@ -348,7 +348,7 @@
 		
 		// 随机位置生成
 		var randomGenerate = function () {
-			random = Math.floor(Math.random() * 18 + 1);
+			random = Math.floor(Math.random() * 12 + 1);
 			if ($.inArray(random, randomArray) == -1) {
 				randomArray.push(random);
 				return random;
