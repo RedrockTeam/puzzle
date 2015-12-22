@@ -56,6 +56,9 @@
 		var stop = function (again) {
 			// 计时器停止
 			spendTime = clock.stop();
+			$.each($('.one-pic'), function (index, element) {
+				$(element).removeClass('selectedSlider unselectSlider');
+			});
 			if (spendTime) {
 				// 数据回收
 				randomArray = [];
