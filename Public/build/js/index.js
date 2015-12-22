@@ -57,7 +57,7 @@
 			// 计时器停止
 			spendTime = clock.stop();
 			$.each($('.one-pic'), function (index, element) {
-				$(element).removeClass('selectedSlider unselectSlider');
+				$(element).removeClass('selectedSlider').addClass('unselectSlider');
 			});
 			if (spendTime) {
 				// 数据回收
