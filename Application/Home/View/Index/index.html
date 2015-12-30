@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
 		<meta name="screen-orientation" content="portrait">
 		<title>游戏首页</title>
-		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/src/css/animate.min.css">
 		<link rel="stylesheet" href="__PUBLIC__/src/css/index.css">
 	</head>
 	<body>
@@ -144,9 +144,10 @@
 		            imgUrl: "http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png",
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		                util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // 用户取消分享后执行的回调函数
+		                util.delCookie('rank');
 		            }
 		        });
 		        wx.onMenuShareAppMessage({
@@ -158,9 +159,10 @@
 		            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		                util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // 用户取消分享后执行的回调函数
+		                util.delCookie('rank');
 		            }
 		        });
 		        wx.onMenuShareQQ({
@@ -170,9 +172,10 @@
 		            imgUrl: 'http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png', // 分享图标
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
+		                util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // 用户取消分享后执行的回调函数
+		                util.delCookie('rank');
 		            }
 		        });
 		    });

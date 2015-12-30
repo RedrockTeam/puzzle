@@ -227,7 +227,6 @@
 			_rankInfoShow(rankInfo);
 			_spendTimeShow(spendTime);
 			result.css('display', 'block').addClass('animated flipInX');
-			alert(util.getCookie('rank'));
 		};
 
 		// 结果页面排名显示
@@ -380,7 +379,7 @@
 		// 设置cookie
 		var setCookie = function (name, value) {
 			document.cookie = name+ "=" + escape(value);
-		}
+		};
 
 		// 获取cookie
 		var getCookie = function (name) {
@@ -396,11 +395,21 @@
 		  		}
 				return undefined;
 			}
-		}
+		};
+
+		var delCookie = function (name) {
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			var cval = getCookie(name);
+			if(cval != null)
+				document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+			}
+		};
 
 		return {
 			setCookie: setCookie,
 			getCookie: getCookie,
+			delCookie: delCookie,
 			getRankInfo: getRankInfo,
 			randomGenerate: randomGenerate
 		};
