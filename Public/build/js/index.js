@@ -378,7 +378,7 @@
 
 		// 设置cookie
 		var setCookie = function (name, value) {
-			document.cookie = name+ "=" + escape(value);
+			document.cookie = name + "=" + escape(value);
 		};
 
 		// 获取cookie
@@ -395,13 +395,13 @@
 		  		}
 				return undefined;
 			}
-		};
+		}
 
 		var delCookie = function (name) {
 			var exp = new Date();
 			exp.setTime(exp.getTime() - 1);
 			var cval = getCookie(name);
-			if(cval != null)
+			if(cval != null) {
 				document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 			}
 		};
