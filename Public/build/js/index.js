@@ -235,6 +235,7 @@
 			for (var i = rankInfo.length - 1; i >= 0; i--) {
 				rankInfoImg.eq(i).attr('src', rankImgPath + rankInfo[i] + '.png').css('display', 'block');
 			}
+			alert(util.getCookie('rank'));
 		};
 
 		// 结果页面耗时显示
