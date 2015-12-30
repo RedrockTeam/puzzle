@@ -389,8 +389,8 @@
 		    		end = document.cookie.indexOf(";", start);
 		    		if (end == -1)  {
 		    			end = document.cookie.length;
-		    		} 
-		    		return unescape(document.cookie.substring(start,end))
+		    		}
+		    		return unescape(document.cookie.substring(start,end));
 		  		}
 				return undefined;
 			}
