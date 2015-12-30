@@ -74,7 +74,6 @@
 					if (response.status === 200) {
 						// 显示结果页面
 						layout.resultViewShow(spendTime, response.data);
-						util.setCookie('rank', response.number);
 					} else {
 						alert('你的网络有问题, 刚刚的成绩未生效!');
 					}
@@ -400,7 +399,7 @@
 			var exp = new Date();
 			exp.setTime(exp.getTime() - 1);
 			var cval = getCookie(name);
-			if(cval != null) {
+			if(cval) {
 				document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 			}
 		};

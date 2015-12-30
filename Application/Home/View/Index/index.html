@@ -6,7 +6,7 @@
 		<meta name="screen-orientation" content="portrait">
 		<title>重邮地图拼拼看</title>
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
-		<link rel="stylesheet" href="__PUBLIC__/src/css/index.css">
+		<link rel="stylesheet" href="__PUBLIC__/src/css/index.min.css">
 	</head>
 	<body>
 		
@@ -93,7 +93,7 @@
 	</body>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
-	<script src="__PUBLIC__/build/js/index.js"></script>
+	<script src="__PUBLIC__/src/js/index.min.js"></script>
 	<script>
 
 		$(function () {
@@ -139,43 +139,37 @@
 
 			wx.ready(function(){
 		        wx.onMenuShareTimeline({
-		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，排第'+ util.getCookie('rank') +'名，你也加入吧？', // 分享标题
+		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，你也加入吧？', // 分享标题
 		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=402860568&idx=2&sn=0f7f2730f078c35b3dd1e0179415e72a&scene=0#wechat_redirect",
 		            imgUrl: "http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png",
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
-		                // util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // util.delCookie('rank');
 		            }
 		        });
 		        wx.onMenuShareAppMessage({
-		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，排第'+ util.getCookie('rank') +'名，你也加入吧？', // 分享标题
-		            desc: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，排第'+ util.getCookie('rank') +'名，你也加入吧？', // 分享描述
+		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，你也加入吧？', // 分享标题
+		            desc: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，你也加入吧？', // 分享描述
 		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=402860568&idx=2&sn=0f7f2730f078c35b3dd1e0179415e72a&scene=0#wechat_redirect",
 		            imgUrl: 'http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png', // 分享图标
 		            type: '', // 分享类型,music、video或link，不填默认为link
 		            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
-		                // util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // util.delCookie('rank');
 		            }
 		        });
 		        wx.onMenuShareQQ({
-		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，排第'+ util.getCookie('rank') +'名，你也加入吧？', // 分享标题
-		            desc: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，排第'+ util.getCookie('rank') +'名，你也加入吧？', // 分享描述
+		            title: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，你也加入吧？', // 分享标题
+		            desc: '【玩游戏 赢大奖】我在参与 “重邮地图拼拼看” 游戏，你也加入吧？', // 分享描述
 		            link: "http://mp.weixin.qq.com/s?__biz=MjM5NDAzNDM2MQ==&mid=402860568&idx=2&sn=0f7f2730f078c35b3dd1e0179415e72a&scene=0#wechat_redirect",
 		            imgUrl: 'http://hongyan.cqupt.edu.cn/puzzle/Public/src/images/share_logo.png', // 分享图标
 		            success: function () {
 		                alert('分享成功!');// 用户确认分享后执行的回调函数
-		                // util.delCookie('rank');
 		            },
 		            cancel: function () {
-		                // util.delCookie('rank');
 		            }
 		        });
 		    });
