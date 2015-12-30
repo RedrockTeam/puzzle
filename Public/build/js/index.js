@@ -74,9 +74,9 @@
 					if (response.status === 200) {
 						// 显示结果页面
 						layout.resultViewShow(spendTime, response.data);
-						console.log(response.number);
+						alert(response.number);
 						util.setCookie('rank', response.number);
-						console.log(util.getCookie('rank'));
+						alert(util.getCookie('rank'));
 					} else {
 						alert('你的网络有问题, 刚刚的成绩未生效!');
 					}
