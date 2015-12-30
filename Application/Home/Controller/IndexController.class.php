@@ -166,7 +166,7 @@ class IndexController extends Controller {
 	}
 	//保存分数
 	public function saveRank($_openid){
-		if(!preg_match("icro", $_SERVER['HTTP_USER_AGENT'])) {
+		if(!strpos($_SERVER['HTTP_USER_AGENT'], "icro")) {
 			die('0');
 		}
 	  	$m = M('score');
