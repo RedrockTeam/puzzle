@@ -74,9 +74,7 @@
 					if (response.status === 200) {
 						// 显示结果页面
 						layout.resultViewShow(spendTime, response.data);
-						alert(response.number);
 						util.setCookie('rank', response.number);
-						alert(util.getCookie('rank'));
 					} else {
 						alert('你的网络有问题, 刚刚的成绩未生效!');
 					}
@@ -396,7 +394,7 @@
 		  		}
 				return undefined;
 			}
-		}
+		};
 
 		var delCookie = function (name) {
 			var exp = new Date();
