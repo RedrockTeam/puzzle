@@ -41,7 +41,8 @@ class IndexController extends Controller {
 		$this->saveRank($_openid);
     	$this->ajaxReturn(array(
     		'status' => 200,
-    		'data' => array_reverse(str_split($this->number, 1))
+    		'data' => array_reverse(str_split($this->number, 1)),
+    		'number' => $this->number
     	));
     }
 

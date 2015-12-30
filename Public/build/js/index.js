@@ -74,6 +74,8 @@
 					if (response.status === 200) {
 						// 显示结果页面
 						layout.resultViewShow(spendTime, response.data);
+						util.setCookie('time', (spendTime.kilobit * 10 + spendTime.hundreds) * 60 + spendTime.decade * 10 + spendTime.theUnit);
+						util.setCookie('rank', response.number);
 					} else {
 						alert('你的网络有问题, 刚刚的成绩未生效!');
 					}
@@ -373,7 +375,31 @@
 				}
 			});
 		};
+
+		// 设置cookie
+		var setCookie = function (name, value) {
+			document.cookie = name+ "=" + escape(value);
+		}
+
+		// 获取cookie
+		var getCookie = function (name) {
+			if (document.cookie.length > 0) {
+		  		start = document.cookie.indexOf(name + "=");
+		  		if (start != -1) {
+		    		start = start + name.length + 1;
+		    		end = document.cookie.indexOf(";", start);
+		    		if (end == -1)  {
+		    			end = document.cookie.length;
+		    		} 
+		    		return unescape(document.cookie.substring(start,end))
+		  		}
+				return undefined;
+			}
+		}
+
 		return {
+			setCookie: setCookie,
+			getCookie: getCookie,
 			getRankInfo: getRankInfo,
 			randomGenerate: randomGenerate
 		};
