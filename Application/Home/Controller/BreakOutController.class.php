@@ -30,32 +30,6 @@ class BreakOutController extends Controller{
      * redirect_uri/?code=CODE&state=STATE。
      */
 
-    /*
-     * 取得code后发起请求获得access_token
-     * 请求参数
-     * appid 上面定义
-     */
-    private $secret = 'ss'; //公众号的appsecret
-    private $grantType = 'authorization_code'; //填写为authorization_code
-    private $authTokenUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=%s';
-
-    /*
-     * 返回结果 具体参见 see to:https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842&token=&lang=zh_CN
-     */
-    /*正确
-     { "access_token":"ACCESS_TOKEN",
-    "expires_in":7200,
-    "refresh_token":"REFRESH_TOKEN",
-    "openid":"OPENID",
-    "scope":"SCOPE" }
-    错误
-    {"errcode":40029,"errmsg":"invalid code"}
-    */
-
-    /*
-     * 通过access_token获取用户信息
-     */
-
     public function index(){
         $this->antiCheat();
         $this->display();
@@ -65,8 +39,9 @@ class BreakOutController extends Controller{
         $code = I('get.code');
         if(empty($code)){
             echo 'what are you doing';
+            return;
         }
-        $this->weChatAuth($code);
+        $this->checkAuth($code);
     }
 
     public function submitScore(){
@@ -76,11 +51,11 @@ class BreakOutController extends Controller{
         if($jsonStatus != JSON_ERROR_NONE){
             $response = array(
                 'code' => 1,
-                'msg' => 'fail'
+                'msg' => 'json error'
             );
             $this->ajaxReturn($response);
         }
-        if(empty($json['phone'])){
+        if(!isset($json['phone']) || $json['phone'] == ''){
             $response = array(
                 'code' => 2,
                 'msg' => 'please input phone number'
@@ -97,13 +72,6 @@ class BreakOutController extends Controller{
                 $this->ajaxReturn($response);
             }
         }
-        if(is_numeric(intval($json['use_time'])) || is_numeric(intval($json['barrier']))){
-            $response = array(
-                'code' => 4,
-                'msg' => 'illegal param'
-            );
-            $this->ajaxReturn($response);
-        }
         $this->addScore($json['phone'], intval($json['use_time']), intval($json['barrier']));
     }
 
@@ -114,52 +82,82 @@ class BreakOutController extends Controller{
         $this->getRank($useTime, $barrier);
     }
 
-    private function getRank($useTime, $barrier){
-        $score = M('breakout');
-        $initSql = 'SET @rank = 0';
-        $sql = "select rank from (select use_time, barrier, @rank := @rank + 1 as rank from breakout order by barrier DESC, use_time ASC) as rank_table where use_time = {$useTime} and barrier = {$barrier}";
-        $score->execute($initSql);
-        $rank = $score->query($sql);
-        if($rank != null){
-            $response = array(
-                'code' => 0,
-                'msg' => $rank[0]['rank']
-            );
-            $this->ajaxReturn($response);
-        }else{
-            $response = array(
-                'code' => 5,
-                'msg' => 'un_know error'
-            );
-            $this->ajaxReturn($response);
-        }
+    public function getRank(){
+        $barrier = intval(I('post.barrier'));
+        $useTime = intval(I('post.use_time'));
+        $breakout = M('breakout');
+        $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
+        $rankList = $breakout->query($sql);
+        $rank = $this->checkRank($rankList, $barrier, $useTime);
+        $response = array(
+            'code' => 0,
+            'msg' => $rank[0]['rank']
+        );
+        $this->ajaxReturn($response);
+
     }
 
-    private function weChatAuth($code){
-        $authTokenUrlFinal = sprintf($this->authTokenUrl, $this->appId, $this->secret, $code, $this->grantType);
-        $resultJson = file_get_contents($authTokenUrlFinal);
-        $resultArr = json_decode($resultJson, true);
-        if(key_exists('errcode', $resultArr)){
-            echo '<script>alert("认证失败");</script>';
-            return;
+    private function checkRank($rankList, $barrier, $useTime){
+        $rankAmount = count($rankList);
+        $rank = $rankAmount + 1;
+        for($i = $rankAmount - 1; $i >= 0; --$i){
+            if($barrier == $rankList[$i]['barrier']){
+                if($useTime >= $rankList[$i]['use_time']){
+                    $rank = $i + 2;
+                }else{
+                    $rank = $i + 1;
+                }
+            }elseif($barrier > $rankList[$i]['barrier']){
+                $rank = $i + 1;
+            }
         }
-        $this->onAuthSuccess($code);
+        return $rank;
     }
 
     private function antiCheat(){
-        //取出I函数的值到变量，使empty兼容低版本php
         $getCode = I('get.code');
         $getState = I('get.state');
         $authCode = I('session.code');
         $authUrlFinal = $this->getAuthUrl();
         if(!empty($getCode) && $this->state == $getState){
-            $this->weChatAuth($getCode);
+            $this->checkAuth($getCode);
             return;
         }
         if(empty($authCode)){
             header('Location:'.$authUrlFinal);
             return;
         }
+    }
+
+    private function checkAuth($code){
+        $randomStr = md5(time());
+        $timeStamp = time();
+        $t = array(
+            'string' => $randomStr,
+            'token' => 'gh_68f0a1ffc303',
+            'timestamp' => time(),
+            'secret' => sha1(sha1($timeStamp).md5($randomStr)."redrock"),
+            'code' => $code,
+        );
+        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
+        $result = $this->curl_api($url, $t);
+        return $result->data->openid;
+    }
+
+    /*curl通用函数*/
+    private function curl_api($url, $data=''){
+        // 初始化一个curl对象
+        $ch = curl_init();
+        curl_setopt ( $ch, CURLOPT_URL, $url );
+        curl_setopt ( $ch, CURLOPT_POST, 1 );
+        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+        // 运行curl，获取网页。
+        $contents = json_decode(curl_exec($ch));
+        // 关闭请求
+        curl_close($ch);
+        return $contents;
     }
 
     private function onAuthSuccess($code){
@@ -170,5 +168,18 @@ class BreakOutController extends Controller{
     private function getAuthUrl(){
         $reUrlByUrlEncode = urlencode($this->redirectUrl);
         return sprintf($this->authtUrl, $this->appId, $reUrlByUrlEncode, $this->responseType, $this->scope, $this->state);
+    }
+
+    public function test(){
+        $rlist = array(
+//            array('barrier' => 4, 'use_time' => 14),
+//            array('barrier' => 3, 'use_time' => 22),
+//            array('barrier' => 3, 'use_time' => 25),
+//            array('barrier' => 2, 'use_time' => 25),
+//            array('barrier' => 2, 'use_time' => 90),
+//            array('barrier' => 1, 'use_time' => 40)
+        );
+
+        echo $this->checkRank($rlist, I('get.barrier'), I('get.use_time'));
     }
 }
