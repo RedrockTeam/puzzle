@@ -87,8 +87,8 @@ class BreakOutController extends Controller{
     }
 
     public function getRank(){
-        $barrier = intval(I('post.barrier'));
-        $useTime = intval(I('post.use_time'));
+        $barrier = I('post.barrier');
+        $useTime = I('post.use_time');
         $breakout = M('breakout');
         $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
         $rankList = $breakout->query($sql);
