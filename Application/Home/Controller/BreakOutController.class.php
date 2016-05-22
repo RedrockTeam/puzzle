@@ -95,7 +95,7 @@ class BreakOutController extends Controller{
         $rank = $this->checkRank($rankList, $barrier, $useTime);
         $response = array(
             'code' => 0,
-            'msg' => $rank[0]['rank']
+            'msg' => $rank
         );
         $this->ajaxReturn($response);
 
