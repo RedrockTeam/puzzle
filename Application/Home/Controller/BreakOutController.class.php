@@ -79,7 +79,11 @@ class BreakOutController extends Controller{
         $score = M('breakout');
         $data = array('phone' => $phone, 'use_time' => $useTime, 'barrier' => $barrier); //useTime 为所花费的时间 单位秒
         $score->add($data);
-        $this->getRank($useTime, $barrier);
+        $response = array(
+            'code' => 0,
+            'msg' => 'ok'
+        );
+        $this->ajaxReturn($response);
     }
 
     public function getRank(){
