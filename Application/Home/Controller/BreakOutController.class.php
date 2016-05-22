@@ -189,7 +189,8 @@ class BreakOutController extends Controller{
 
     public function showScore(){
         $s = M('breakout');
-        $r = $s->select();
+        $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
+        $r = $s->query($sql);
         var_dump($r);
     }
 }
