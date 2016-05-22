@@ -19,7 +19,7 @@ class BreakOutController extends Controller{
      * 用户同意授权，获取code
      * 请求参数
      */
-    private $appId = 'appid'; //公众号的唯一标识
+    private $appId = 'wx81a4a4b77ec98ff4'; //公众号的唯一标识
     private $state = 'auth'; //重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节
     private $responseType = 'code'; //返回类型，请填写code
     private $scope = 'snsapi_userinfo'; //应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）
@@ -87,8 +87,8 @@ class BreakOutController extends Controller{
     }
 
     public function getRank(){
-        $barrier = I('post.barrier');
-        $useTime = I('post.use_time');
+        $barrier = intval(I('post.barrier'));
+        $useTime = intval(I('post.use_time'));
         $breakout = M('breakout');
         $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
         $rankList = $breakout->query($sql);
