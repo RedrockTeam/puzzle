@@ -45,6 +45,7 @@ class BreakOutController extends Controller{
     }
 
     public function submitScore(){
+        header('Access-Control-Allow-Origin: *');
         $jsonStr = file_get_contents('php://input');
         @$json = json_decode($jsonStr, true);
         $jsonStatus = json_last_error();
@@ -87,6 +88,7 @@ class BreakOutController extends Controller{
     }
 
     public function getRank(){
+        header('Access-Control-Allow-Origin: *');
         $barrier = intval(I('post.barrier'));
         $useTime = intval(I('post.use_time'));
         $breakout = M('breakout');
