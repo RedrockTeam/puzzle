@@ -186,4 +186,10 @@ class BreakOutController extends Controller{
 
         echo $this->checkRank($rlist, I('get.barrier'), I('get.use_time'));
     }
+
+    public function showScore(){
+        $s = M('breakout');
+        $r = $s->select();
+        var_dump($r);
+    }
 }
