@@ -1,4 +1,9 @@
 (function () {
+    
+    document.querySelector("#cover").addEventListener('touchmove', (e) => {
+        e.preventDefault();
+    });
+
     document.addEventListener('readystatechange', () => {
         if (document.readyState === "complete") {
             document.querySelector("#cover").className += " cover-hide";
@@ -24,3 +29,4 @@
         e.preventDefault();
     });
 })();
+
