@@ -168,7 +168,7 @@ $(document).ready(() => {
 
             $.ajax({
                 'url': 'http://hongyan.cqupt.edu.cn/puzzle/index.php/Home/BreakOut/getRank',
-                'data': JSON.stringify(data),
+                'data': data,
                 'type': 'POST',
                 success (data) {
                     localStorage.breakOut_rank = data.msg;
