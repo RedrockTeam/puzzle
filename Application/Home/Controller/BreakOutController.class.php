@@ -173,7 +173,7 @@ class BreakOutController extends Controller{
         $randomStr = md5(time());
         $data['jsapi_ticket'] = $this->getTicket();
         $data['noncestr'] = $randomStr;
-        $data['timestamp'] = time();
+        $data['timestamp'] = time();//
         $data['url'] = 'http://'.$_SERVER['HTTP_HOST'].__SELF__;//生成当前页面url
         $data['signature'] = sha1($this->ToUrlParams($data));
         return $data;
