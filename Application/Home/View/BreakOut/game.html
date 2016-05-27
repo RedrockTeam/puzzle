@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>突出重围</title>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="stylesheet" href="__PUBLIC__breakOutFE/styles/game.css">
+</head>
+<body>
+
+<section class="share-img">
+    <img src="../imgs/share-img.png" alt="突出重围">
+</section>
+
+<section id="cover" class="cover">
+    <div class="share-text">
+        点击右上角 分享到朋友圈
+    </div>
+    <div class="block">
+        <div class="pause-title"></div>
+        <div id="resume" class="resume">
+
+        </div>
+        <div id="gohome" class="gohome">
+
+        </div>
+        <div id="share" class="share">
+
+        </div>
+    </div>
+</section>
+
+<section id="control" class="control">
+    <div id="score" class="control-status">
+        <span class="control-item">
+            得分:
+        </span>
+        <span class="control-number" id="game-barrier">
+            0
+        </span>
+    </div>
+    <div id="time" class="control-status">
+        <span class="control-item">
+            用时:
+        </span>
+        <span class="control-number" id="game-timer">
+            00 : 00 : 00
+        </span>
+    </div>
+    <div id="pause" class="pause"></div>
+</section>
+
+<section id="container" class="container">
+    <div id="canvas-container" class="canvas-container">
+        <canvas id="canvas" class="canvas" width="320" height="568"></canvas>
+        <!-- canvas 默认适配 iphone 5 ，其他屏幕用 js 调整高度 宽度写死了 233-->
+    </div>
+</section>
+
+<section id="imgs" class="imgs">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-1.png" id="img-title-1">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-2.png" id="img-title-2">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-3.png" id="img-title-3">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-4.png" id="img-title-4">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-5.png" id="img-title-5">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-6.png" id="img-title-6">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-7.png" id="img-title-7">
+    <img src="__PUBLIC__breakOutFE/imgs/game-title-8.png" id="img-title-8">
+    <!--标题-->
+    <img src="__PUBLIC__breakOutFE/imgs/game-touch.png" id="img-touch">
+    <img src="__PUBLIC__breakOutFE/imgs/game-star.png" id="img-star">
+    <img src="__PUBLIC__breakOutFE/imgs/game-rope.png" id="img-rope">
+    <img src="__PUBLIC__breakOutFE/imgs/game-mountain.png" id="img-mountain">
+    <img src="__PUBLIC__breakOutFE/imgs/game-grass.png" id="img-grass">
+    <img src="__PUBLIC__breakOutFE/imgs/game-water-1.png" id="img-water-1">
+    <img src="__PUBLIC__breakOutFE/imgs/game-water-2.png" id="img-water-2">
+    <img src="__PUBLIC__breakOutFE/imgs/game-circle-1.png" id="img-circle-1">
+    <img src="__PUBLIC__breakOutFE/imgs/game-circle-2.png" id="img-circle-2">
+    <img src="__PUBLIC__breakOutFE/imgs/game-circle-3.png" id="img-circle-3">
+    <img src="__PUBLIC__breakOutFE/imgs/game-circle-4.png" id="img-circle-4">
+    <!--各种关卡资源-->
+    <img src="__PUBLIC__breakOutFE/imgs/game-finish.png" id="img-finish">
+</section>
+
+<script src="__PUBLIC__breakOutFE/js/zepto.js"></script>
+<script src="__PUBLIC__breakOutFE/js/game.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var TITLE = '突出重围';
+    var DESC = '我正在参加"突出重围——重走长征路"微信游戏争霸赛, 你也加入吧!';
+    var LINK = '';
+    var IMGURL = '';
+
+    wx.config({
+        debug: false,
+        appId: '',
+        timestamp: '',
+        nonceStr: '',
+        signature: '',
+        jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone'
+        ]
+    });
+    wx.ready(function () {
+        wx.onMenuShareTimeline({
+            title: TITLE,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            type: '',
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareQQ({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareWeibo({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareQZone({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+    });
+    wx.error(function(res){
+    });
+</script>
+</body>
+</html>

@@ -34,7 +34,23 @@ class BreakOutController extends Controller{
         $this->antiCheat();
         $this->display();
     }
-
+    public function intro(){
+        $this->antiCheat();
+        $this->display();
+    }
+    public function game(){
+        $this->antiCheat();
+        $this->display();
+    }
+    public function result(){
+        $this->antiCheat();
+        $this->display();
+    }
+    public function refresh(){
+        $this->antiCheat();
+        $this->display();
+    }    
+    //  五个页面
     public function authCallback(){
         $code = I('get.code');
         if(empty($code)){
