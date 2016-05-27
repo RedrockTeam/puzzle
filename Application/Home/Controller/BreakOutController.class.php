@@ -31,23 +31,25 @@ class BreakOutController extends Controller{
      */
 
     public function index(){
-        //$this->antiCheat();
+        $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function intro(){
-        //$this->antiCheat();
+        $this->antiCheat();
         $this->display();
     }
     public function game(){
-        //$this->antiCheat();
+        $this->antiCheat();
         $this->display();
     }
     public function result(){
-        //$this->antiCheat();
+        $this->antiCheat();
         $this->display();
     }
     public function refresh(){
-        //$this->antiCheat();
+        $this->antiCheat();
         $this->display();
     }    
     //  五个页面
@@ -104,7 +106,7 @@ class BreakOutController extends Controller{
     }
 
     public function getRank(){
-        header('Access-Control-Allow-Origin: *');
+//        header('Access-Control-Allow-Origin: *');
         $barrier = intval(I('post.barrier'));
         $useTime = intval(I('post.use_time'));
         $breakout = M('breakout');
@@ -152,6 +154,42 @@ class BreakOutController extends Controller{
         }
     }
 
+    private function getTicket(){
+        $randomStr = md5(time());
+        $timeStamp = time();
+        $t = array(
+            'string' => $randomStr,
+            'token' => 'gh_68f0a1ffc303',
+            'timestamp' => $timeStamp,
+            'secret' => sha1(sha1($timeStamp).md5($randomStr)."redrock"),
+            'openid' => $this->openid,
+        );
+        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket";
+        $result = $this->curl_api($url, $t);
+        $this->jsapi_ticket = $result->data;
+    }
+
+    public function JSSDKSignature(){
+        $randomStr = md5(time());
+        $data['jsapi_ticket'] = $this->getTicket();
+        $data['noncestr'] = $randomStr;
+        $data['timestamp'] = time();
+        $data['url'] = 'http://'.$_SERVER['HTTP_HOST'].__SELF__;//生成当前页面url
+        $data['signature'] = sha1($this->ToUrlParams($data));
+        return $data;
+    }
+
+    private function ToUrlParams($urlObj){
+        $buff = "";
+        foreach ($urlObj as $k => $v) {
+            if($k != "signature") {
+                $buff .= $k . "=" . $v . "&";
+            }
+        }
+        $buff = trim($buff, "&");
+        return $buff;
+    }
+
     private function checkAuth($code){
         $randomStr = md5(time());
         $timeStamp = time();
@@ -164,7 +202,9 @@ class BreakOutController extends Controller{
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
         $result = $this->curl_api($url, $t);
-        return $result->data->openid;
+        $openId =  $result->data->openid;
+        session('open_id', $openId);
+        return $openId;
     }
 
     /*curl通用函数*/

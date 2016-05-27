@@ -94,10 +94,10 @@
 
     wx.config({
         debug: false,
-        appId: '',
-        timestamp: '',
-        nonceStr: '',
-        signature: '',
+        appId: '{$appId}',
+        timestamp: '{$signature.timestamp}',
+        nonceStr: '{$signature.noncestr}',
+        signature: '{$signature.signature}',
         jsApiList: [
             'onMenuShareTimeline',
             'onMenuShareAppMessage',
