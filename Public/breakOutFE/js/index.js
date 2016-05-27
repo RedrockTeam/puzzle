@@ -15,10 +15,10 @@
         }
     });
     document.querySelector("#start").addEventListener('touchstart', () => {
-        window.location.href = './index.php/Home/BreakOut/game.html';
+        window.location.href = './game.html';
     });
     document.querySelector("#intro").addEventListener('touchstart', () => {
-        window.location.href = './index.php/Home/BreakOut/intro.html';
+        window.location.href = './intro.html';
     });
     document.addEventListener('touchmove', (e) => {
         e.preventDefault();

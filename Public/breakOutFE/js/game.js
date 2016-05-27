@@ -179,7 +179,7 @@ $(document).ready(() => {
                 }
             });
 
-            window.location.href = './index.php/Home/BreakOut/result.html';
+            window.location.href = './result.html';
 
 
             /*
@@ -1013,7 +1013,7 @@ $(document).ready(() => {
         }
     });
     $("#gohome").on('touchstart', () => {
-        window.location.href = './index.php/Home/BreakOut/index';
+        window.location.href = './index';
     });
     $("#share").on('touchstart', () => {
         $(".share-text").addClass("show");
