@@ -63,6 +63,7 @@ class BreakOutController extends Controller{
     }
 
     public function submitScore(){
+        $this->antiCheat();
         header('Access-Control-Allow-Origin: *');
         $jsonStr = file_get_contents('php://input');
         @$json = json_decode($jsonStr, true);
@@ -169,7 +170,7 @@ class BreakOutController extends Controller{
         return $result->data;
     }
 
-    public function JSSDKSignature(){
+    private function JSSDKSignature(){
         $randomStr = md5(time());
         $data['jsapi_ticket'] = $this->getTicket();
         $data['noncestr'] = $randomStr;
@@ -233,7 +234,7 @@ class BreakOutController extends Controller{
         return sprintf($this->authtUrl, $this->appId, $reUrlByUrlEncode, $this->responseType, $this->scope, $this->state);
     }
 
-    public function test(){
+    private function test(){
         $rlist = array(
 //            array('barrier' => 4, 'use_time' => 14),
 //            array('barrier' => 3, 'use_time' => 22),
@@ -246,7 +247,7 @@ class BreakOutController extends Controller{
         echo $this->checkRank($rlist, I('get.barrier'), I('get.use_time'));
     }
 
-    public function showScore(){
+    private function showScore(){
         $s = M('breakout');
         $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
         $r = $s->query($sql);
