@@ -32,6 +32,9 @@ class BreakOutController extends Controller{
 
     public function index(){
         $this->antiCheat();
+        var_dump($this->JSSDKSignature());
+        echo $this->appId;
+        exit;
         $this->assign('signature', $this->JSSDKSignature());
         $this->assign('appId', $this->appId);
         $this->display();
