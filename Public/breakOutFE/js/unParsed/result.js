@@ -1,3 +1,13 @@
+$(window).on('scroll.elasticity',function (e){
+    e.preventDefault();
+}).on('touchmove.elasticity',function(e){
+        if (e.target.className !== "story") {
+            e.preventDefault();
+        }
+    console.log(e.target);
+});
+//  去掉页面默认滚动
+
 $(document).ready(() => {
 
     const [
