@@ -14,7 +14,7 @@
             document.querySelector("#intro").className += " intro-after";
             document.querySelector("#redrock").className += " redrock-after";
         }, 1000);
-    }, 3000);
+    }, 5000);
 
     //document.addEventListener('readystatechange', () => {
     //    if (document.readyState === "complete") {
