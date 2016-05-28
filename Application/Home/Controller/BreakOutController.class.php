@@ -32,11 +32,6 @@ class BreakOutController extends Controller{
 
     public function index(){
         $this->antiCheat();
-        var_dump($this->JSSDKSignature());
-        echo $this->appId;
-        exit;
-        $this->assign('signature', $this->JSSDKSignature());
-        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function intro(){
@@ -45,6 +40,8 @@ class BreakOutController extends Controller{
     }
     public function game(){
         $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function result(){
@@ -169,7 +166,7 @@ class BreakOutController extends Controller{
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket";
         $result = $this->curl_api($url, $t);
-        $this->jsapi_ticket = $result->data;
+        return $result->data;
     }
 
     public function JSSDKSignature(){
