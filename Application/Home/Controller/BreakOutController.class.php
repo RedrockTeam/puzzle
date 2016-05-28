@@ -31,25 +31,25 @@ class BreakOutController extends Controller{
      */
 
     public function index(){
-        $this->antiCheat();
+        //$this->antiCheat();
         $this->assign('signature', $this->JSSDKSignature());
         $this->assign('appId', $this->appId);
         $this->display();
     }
     public function intro(){
-        $this->antiCheat();
+//        $this->antiCheat();
         $this->display();
     }
     public function game(){
-        $this->antiCheat();
+//        $this->antiCheat();
         $this->display();
     }
     public function result(){
-        $this->antiCheat();
+//        $this->antiCheat();
         $this->display();
     }
     public function refresh(){
-        $this->antiCheat();
+//        $this->antiCheat();
         $this->display();
     }    
     //  五个页面
