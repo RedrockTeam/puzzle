@@ -15,16 +15,15 @@ $(document).ready(() => {
             minute,
             second,
             mesc,
-            rank,
             total
         ] = [
             localStorage.breakOut_score,
             localStorage.breakOut_minute,
             localStorage.breakOut_second,
             localStorage.breakOut_msec,
-            localStorage.breakOut_rank,
             localStorage.breakOut_total
         ].map(item => {return parseInt(item)});
+    const rank = localStorage.breakOut_rank;    
     /*
     *   因为 localStorage 存的是字符串
     *   然后就先转数字再赋值吧 hhh
