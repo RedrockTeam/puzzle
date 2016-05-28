@@ -30,6 +30,10 @@ class BreakOutController extends Controller{
      * redirect_uri/?code=CODE&state=STATE。
      */
 
+    public function _initialize(){
+        header('Cache-Control: no-cache');
+    }
+
     public function index(){
         $this->antiCheat();
         $this->display();
