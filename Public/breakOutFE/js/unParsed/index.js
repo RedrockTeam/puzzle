@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         window.location.href = './intro.html';
     });
     
-    if (localStorage.breakOut_isShare) {
+    if (!localStorage.breakOut_isShare) {
         localStorage.breakOut_isShare = '0';
     }
     /*
