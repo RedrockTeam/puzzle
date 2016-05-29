@@ -12,10 +12,6 @@
 </head>
 <body>
 
-<!--     <section class="share-img">
-        <img src="__PUBLIC__/breakOutFE/imgs/share-img.png" alt="突出重围">
-    </section> -->
-
     <section class="title">
         <!--背景介绍-->
     </section>
@@ -62,7 +58,8 @@
         });
         wx.ready(function () {
             wx.onMenuShareTimeline({
-                title: TITLE,
+                // title: TITLE,
+                title: desc,
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {

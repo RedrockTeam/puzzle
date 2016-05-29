@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="__PUBLIC__/breakOutFE/styles/game.css">
 </head>
 <body>
-<!-- 
-<section class="share-img">
-    <img src="__PUBLIC__/breakOutFE/imgs/share-img.png" alt="突出重围">
-</section> -->
 
 <section id="cover" class="cover">
     <div class="share-text">
@@ -108,7 +104,8 @@
     });
     wx.ready(function () {
         wx.onMenuShareTimeline({
-            title: TITLE,
+            // title: TITLE,
+            title: desc,
             link: LINK,
             imgUrl: IMGURL,
             success: function () {

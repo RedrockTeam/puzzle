@@ -12,10 +12,6 @@
 </head>
 <body>
 
-<!--     <section class="share-img">
-        <img src="" alt="突出重围">
-    </section> -->
-
     <section id="cover" class="cover">
         <div class="title">
 
@@ -103,7 +99,8 @@
         });
         wx.ready(function () {
             wx.onMenuShareTimeline({
-                title: TITLE,
+                // title: TITLE,
+                title: desc,
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {
