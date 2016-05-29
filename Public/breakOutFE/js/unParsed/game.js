@@ -172,6 +172,9 @@ $(document).ready(() => {
                 'type': 'POST',
                 success (data) {
                     localStorage.breakOut_rank = data.msg;
+                    setTimeout(() => {
+                        window.location.href = './result.html';
+                    }, 50);
                 },
                 error (err) {
                     console.log("error");
@@ -179,8 +182,7 @@ $(document).ready(() => {
                 }
             });
 
-            window.location.href = './result.html';
-
+            // window.location.href = './result.html';
 
             /*
              *   ajax 用来传分数
