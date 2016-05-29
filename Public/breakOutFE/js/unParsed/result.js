@@ -139,23 +139,28 @@ $(document).ready(() => {
         $("#phone").val("");
 
         if (reg.test(text)) {
-            document.querySelector("#phone").setAttribute('placeholder', '提交中 请稍等');
-            $.ajax({
-                'url': 'http://hongyan.cqupt.edu.cn/puzzle/index.php/Home/BreakOut/submitScore',
-                'data': JSON.stringify(data),
-                'type': 'POST',
-                success (data) {
-                    if (data.code == 0) {
-                        document.querySelector("#phone").setAttribute('placeholder', '成功 点击右上角分享到朋友圈');
-                    } else {
+            if (localStorage.breakOut_isShare != '0') {
+                document.querySelector("#phone").setAttribute('placeholder', '提交中 请稍等');
+                $.ajax({
+                    'url': 'http://hongyan.cqupt.edu.cn/puzzle/index.php/Home/BreakOut/submitScore',
+                    'data': JSON.stringify(data),
+                    'type': 'POST',
+                    success (data) {
+                        if (data.code == 0) {
+                            document.querySelector("#phone").setAttribute('placeholder', '成功 点击右上角分享到朋友圈');
+                        } else {
+                            document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
+                        }
+                    },
+                    error (err) {
                         document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
+                        console.log(err);
                     }
-                },
-                error (err) {
-                    document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
-                    console.log(err);
-                }
-            });
+                });
+            } else {
+                document.querySelector("#phone").setAttribute('placeholder', '你还没有分享哦');
+            }
+            
         } else {
             document.querySelector("#phone").setAttribute('placeholder', '请输入正确的手机号');
         }

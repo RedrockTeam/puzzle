@@ -35,7 +35,7 @@
                     排名
                 </span>
                 <span class="number" id="range">
-                    1234
+                    69
                 </span>
         </p>
         <p class="time">
@@ -99,11 +99,11 @@
         });
         wx.ready(function () {
             wx.onMenuShareTimeline({
-                // title: TITLE,
                 title: DESC,
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {
+                    localStorage.breakOut_isShare = '1';
                 },
                 cancel: function () {
                 }
@@ -115,6 +115,7 @@
                 imgUrl: IMGURL,
                 type: '',
                 success: function () {
+                    localStorage.breakOut_isShare = '1';
                 },
                 cancel: function () {
                 }
@@ -125,6 +126,7 @@
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {
+                    localStorage.breakOut_isShare = '1';
                 },
                 cancel: function () {
                 }
@@ -135,6 +137,7 @@
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {
+                    localStorage.breakOut_isShare = '1';
                 },
                 cancel: function () {
                 }
@@ -145,6 +148,7 @@
                 link: LINK,
                 imgUrl: IMGURL,
                 success: function () {
+                    localStorage.breakOut_isShare = '1';
                 },
                 cancel: function () {
                 }
