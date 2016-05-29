@@ -174,7 +174,8 @@ $(document).ready(() => {
                     localStorage.breakOut_rank = data.msg;
                     setTimeout(() => {
                         window.location.href = './result.html';
-                    }, 50);
+                    }, 10);
+                    //  针对苹果的 NaN 问题
                 },
                 error (err) {
                     console.log("error");

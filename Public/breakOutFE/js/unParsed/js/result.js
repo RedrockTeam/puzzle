@@ -36,7 +36,7 @@ $(document).ready(() => {
     const $btn_tel_back = $("#tel-back");
     const $btn_tel_submit = $("#tel-submit");
     const $cover = $("#cover");
-    let isSubmit = 0;
+    // let isSubmit = 0;
     /*
     *   @params
     *       score: 当前关卡
@@ -140,33 +140,28 @@ $(document).ready(() => {
         $("#phone").val("");
 
         if (reg.test(text)) {
-            if (localStorage.breakOut_isShare != '0') {
-                document.querySelector("#phone").setAttribute('placeholder', '提交中 请稍等');
-                $.ajax({
-                    'url': 'http://hongyan.cqupt.edu.cn/puzzle/index.php/Home/BreakOut/submitScore',
-                    'data': JSON.stringify(data),
-                    'type': 'POST',
-                    success (data) {
-                        if (isSubmit > 0) {
-                            document.querySelector("#phone").setAttribute('placeholder', '您已经提交过了');
+            document.querySelector("#phone").setAttribute('placeholder', '提交中 请稍等');
+            $.ajax({
+                'url': 'http://hongyan.cqupt.edu.cn/puzzle/index.php/Home/BreakOut/submitScore',
+                'data': JSON.stringify(data),
+                'type': 'POST',
+                success (data) {
+                    if (isSubmit > 0) {
+                        document.querySelector("#phone").setAttribute('placeholder', '您已经提交过了');
+                    } else {
+                        if (data.code == 0) {
+                            document.querySelector("#phone").setAttribute('placeholder', '成功 点击右上角分享到朋友圈');
+                            isSubmit++;
                         } else {
-                            if (data.code == 0) {
-                                document.querySelector("#phone").setAttribute('placeholder', '提交成功');
-                                isSubmit++;
-                            } else {
-                                document.querySelector("#phone").setAttribute('placeholder', '提交失败');
-                            }
+                            document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
                         }
-                    },
-                    error (err) {
-                        document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
-                        console.log(err);
                     }
-                });
-            } else {
-                document.querySelector("#phone").setAttribute('placeholder', '还没有分享哦 点击右上角分享');
-            }
-            
+                },
+                error (err) {
+                    document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
+                    console.log(err);
+                }
+            });
         } else {
             document.querySelector("#phone").setAttribute('placeholder', '请输入正确的手机号');
         }
