@@ -148,14 +148,14 @@ $(document).ready(() => {
                     'type': 'POST',
                     success (data) {
                         if (isSubmit > 0) {
+                            document.querySelector("#phone").setAttribute('placeholder', '您已经提交过了');
+                        } else {
                             if (data.code == 0) {
                                 document.querySelector("#phone").setAttribute('placeholder', '提交成功');
                                 isSubmit++;
                             } else {
                                 document.querySelector("#phone").setAttribute('placeholder', '提交失败');
                             }
-                        } else {
-                            document.querySelector("#phone").setAttribute('placeholder', '您已经提交过了');
                         }
                     },
                     error (err) {
@@ -164,7 +164,7 @@ $(document).ready(() => {
                     }
                 });
             } else {
-                document.querySelector("#phone").setAttribute('placeholder', '你还没有分享哦');
+                document.querySelector("#phone").setAttribute('placeholder', '还没有分享哦 点击右上角分享');
             }
             
         } else {
