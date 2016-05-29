@@ -34,12 +34,17 @@ class BreakOutController extends Controller{
         header('Cache-Control: no-cache');
     }
 
+    //五个页面
     public function index(){
         $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function intro(){
         $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function game(){
@@ -50,13 +55,17 @@ class BreakOutController extends Controller{
     }
     public function result(){
         $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }
     public function refresh(){
         $this->antiCheat();
+        $this->assign('signature', $this->JSSDKSignature());
+        $this->assign('appId', $this->appId);
         $this->display();
     }    
-    //  五个页面
+
     public function authCallback(){
         $code = I('get.code');
         if(empty($code)){
