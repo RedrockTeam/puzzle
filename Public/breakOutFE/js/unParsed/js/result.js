@@ -36,7 +36,7 @@ $(document).ready(() => {
     const $btn_tel_back = $("#tel-back");
     const $btn_tel_submit = $("#tel-submit");
     const $cover = $("#cover");
-    // let isSubmit = 0;
+    let isSubmit = 0;
     /*
     *   @params
     *       score: 当前关卡

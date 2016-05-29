@@ -172,9 +172,10 @@ $(document).ready(() => {
                 'type': 'POST',
                 success (data) {
                     localStorage.breakOut_rank = data.msg;
-                    setTimeout(() => {
-                        window.location.href = './result.html';
-                    }, 10);
+                    window.location.href = './result.html';
+                    // setTimeout(() => {
+                    //     window.location.href = './result.html';
+                    // }, 10);
                     //  针对苹果的 NaN 问题
                 },
                 error (err) {
