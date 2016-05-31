@@ -135,6 +135,12 @@ $(document).ready(() => {
         },
         gameOver () {
 
+            controller.stopTimer();
+            //  停止 视觉上的 timer
+            $(".block").addClass('block-submit');
+            $(".cover-wait").addClass("show");
+            $("#cover").addClass("cover-over");
+
             let data = {};
 
             controller.totalTime += new Date() - controller.startTime;
