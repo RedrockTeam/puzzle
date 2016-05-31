@@ -15,13 +15,15 @@ $(document).ready(() => {
             minute,
             second,
             mesc,
-            total
+            total,
+            dieAt
         ] = [
             localStorage.breakOut_score,
             localStorage.breakOut_minute,
             localStorage.breakOut_second,
             localStorage.breakOut_msec,
-            localStorage.breakOut_total
+            localStorage.breakOut_total,
+            localStorage.breakOut_dieAt
         ].map(item => {return parseInt(item)});
     const rank = localStorage.breakOut_rank;    
     /*
@@ -170,6 +172,6 @@ $(document).ready(() => {
 
 
     $time.text(returnTimeStr(minute, second, mesc));
-    $title.text('当前关卡：' + returnTitle(score));
-    $story.text(returnStory(score));
+    $title.text('当前关卡：' + returnTitle(dieAt));
+    $story.text(returnStory(dieAt));
 });

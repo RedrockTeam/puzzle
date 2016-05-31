@@ -141,6 +141,28 @@ $(document).ready(() => {
             $(".cover-wait").addClass("show");
             $("#cover").addClass("cover-over");
 
+            let showStory = 0;
+            let barrierRange = [
+                [winHeight + 200, winHeight - 500 - 30],
+                [winHeight - 650 + 30, winHeight - 800 - 30],
+                [winHeight - 1050 + 30, winHeight - 1200 - 30],
+                [winHeight - 1400 + 30, winHeight - 1650 - 30],
+                [winHeight - 1850 + 30, winHeight - 2050 - 30],
+                [winHeight - 2200 + 30, winHeight - 2400 - 30],
+                [winHeight - 2600 + 30, winHeight - 2700 - 30],
+                [winHeight - 2850 + 30, winHeight - 3000 - 30],
+                [winHeight - 3200 + 30, winHeight - 3300 - 30]
+            ];
+            // 判断在哪个关卡死的 和得分独立 宛若智障
+
+            barrierRange.forEach((item, index) => {
+                if (star.getPos()[1] <= item[0] && star.getPos()[1] >= item[1]) {
+                    showStory = index;
+                }
+            });
+
+            localStorage.breakOut_dieAt = showStory;
+
             let data = {};
 
             controller.totalTime += new Date() - controller.startTime;
