@@ -148,7 +148,7 @@ $(document).ready(() => {
                 'data': JSON.stringify(data),
                 'type': 'POST',
                 success (data) {
-                    if (isSubmit > 0) {
+                    if (isSubmit > 0 || localStorage.breakOut_total == '999999') {
                         document.querySelector("#phone").setAttribute('placeholder', '您已经提交过了');
                     } else {
                         if (data.code == 0) {
