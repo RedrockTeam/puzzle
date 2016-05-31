@@ -154,6 +154,9 @@ $(document).ready(() => {
                         if (data.code == 0) {
                             document.querySelector("#phone").setAttribute('placeholder', '成功 点击右上角分享到朋友圈');
                             isSubmit++;
+                            localStorage.breakOut_score = 0;
+                            localStorage.breakOut_total = 999999;
+                            /* 提交成功之后清成绩 避免重复提交 */
                         } else {
                             document.querySelector("#phone").setAttribute('placeholder', '失败 点击右上角分享到朋友圈');
                         }
