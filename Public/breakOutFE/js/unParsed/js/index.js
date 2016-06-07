@@ -18,14 +18,6 @@ window.addEventListener('load', () => {
     document.querySelector("#intro").addEventListener('touchstart', () => {
         window.location.href = './intro.html';
     });
-    
-    if (!localStorage.breakOut_isShare) {
-        localStorage.breakOut_isShare = '0';
-    }
-    /*
-        判断有无分享参数
-        没有的话就是 0
-    */
 });
 /*
 (function () {
