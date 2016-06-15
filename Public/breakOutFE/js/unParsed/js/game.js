@@ -137,9 +137,6 @@ $(document).ready(() => {
 
             controller.stopTimer();
             //  停止 视觉上的 timer
-            $(".block").addClass('block-submit');
-            $(".cover-wait").addClass("show");
-            $("#cover").addClass("cover-over");
 
             let showStory = 0;
             let barrierRange = [
@@ -160,6 +157,13 @@ $(document).ready(() => {
                     showStory = index;
                 }
             });
+
+            $(".block").addClass('block-submit');
+            $(".cover-wait").addClass("show");
+            $("#cover").addClass("cover-over");
+            if (showStory == 8) {
+                $(".game-over").text("胜利会师");
+            }
 
             localStorage.breakOut_dieAt = showStory;
 
@@ -762,7 +766,7 @@ $(document).ready(() => {
         img: document.querySelector("#img-circle-4"),
         rotateDegree: 0,
         rotateSpeed: randomCircleSlowSpeed(),
-        zoneUp: [[0.5, 1], [2.1, 2.6], [3.7, 4.2], [5.1, 5.7]],
+        zoneUp: [[0.5, 1], [2.1, 2.55], [3.7, 4.2], [5.1, 5.7]],
         zoneDown: [[0.5, 1], [2.1, 2.6], [3.6, 4.2], [5.1, 5.7]]
     });
     const sign_four = new Sign({
