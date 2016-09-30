@@ -124,15 +124,14 @@ class BreakOutController extends Controller{
         $barrier = intval(I('post.barrier'));
         $useTime = intval(I('post.use_time'));
         $breakout = M('breakout');
-        $sql = "select barrier, use_time, create_time from breakout order by barrier desc, use_time asc, create_time asc";
+        $sql = "set @rank := 1; select @rank := @rank + 1, barrier, use_time from breakout order by barrier desc, use_time asc";
         $rankList = $breakout->query($sql);
-        $rank = $this->checkRank($rankList, $barrier, $useTime);
+        //$rank = $this->checkRank($rankList, $barrier, $useTime);
         $response = array(
             'code' => 0,
             'msg' => $rank
         );
         $this->ajaxReturn($response);
-
     }
 
     private function checkRank($rankList, $barrier, $useTime){
